@@ -1,6 +1,4 @@
-import { useState } from "react";
 import CamFeed from "../src/components/CamFeed";
-import React from "react";
 import { useEffect, useRef } from "react";
 import Webcam from "react-webcam";
 import { Camera } from "@mediapipe/camera_utils";
@@ -14,7 +12,6 @@ import {
 import { drawConnectors, drawLandmarks } from "@mediapipe/drawing_utils";
 
 function App() {
-  const [count, setCount] = useState(0);
 
   const webcamRef = useRef<Webcam>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -112,20 +109,7 @@ function App() {
   return (
     <>
       <div>
-        <Webcam
-          ref={webcamRef}
-          style={{
-            position: "absolute",
-            marginLeft: "auto",
-            marginRight: "auto",
-            left: 0,
-            right: 0,
-            textAlign: "center",
-            zIndex: 9,
-            width: 1200,
-            height: 800,
-          }}
-        />
+        <CamFeed />
         <canvas
           ref={canvasRef}
           style={{

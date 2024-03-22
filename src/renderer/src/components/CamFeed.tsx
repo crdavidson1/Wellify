@@ -1,5 +1,4 @@
 import Webcam from "react-webcam";
-import React from "react";
 
 export default function CamFeed() {
   return (
