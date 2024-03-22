@@ -109,7 +109,20 @@ function App() {
   return (
     <>
       <div>
-        <CamFeed />
+        <Webcam
+          ref={webcamRef}
+          style={{
+            position: "absolute",
+            marginLeft: "auto",
+            marginRight: "auto",
+            left: 0,
+            right: 0,
+            textAlign: "center",
+            zIndex: 9,
+            width: 1200,
+            height: 800,
+          }}
+        />
         <canvas
           ref={canvasRef}
           style={{
