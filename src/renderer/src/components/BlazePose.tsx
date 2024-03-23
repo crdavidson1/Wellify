@@ -1,78 +1,84 @@
-import React, { useEffect, useRef } from 'react'
-import Webcam from 'react-webcam'
-import '@mediapipe/pose'
-import * as poseDetection from '@tensorflow-models/pose-detection'
-import '@tensorflow/tfjs-core'
-import '@tensorflow/tfjs-backend-webgl'
-import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils'
+import * as pose from '@mediapipe/pose'
+import smoothLandmarks from 'mediapipe-pose-smooth'; // ES6
+import * as cam from "@mediapipe/camera_utils"
+import * as drawingUtils from "@mediapipe/drawing_utils"
+import {useRef, useEffect, useState, useDebugValue} from "react"
+import Webcam from 'react-webcam';
+
 
 const BlazePose: React.FC = () => {
-  const webcamRef = useRef<Webcam>(null)
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const detectorRef = useRef<poseDetection.PoseDetector | null>(null)
+const webcamRef = useRef(null)
+  const canvasRef = useRef(null)
+  var camera = null
+  const [didLoad, setdidLoad] = useState(false)
 
-  useEffect(() => {
-    async function createDetector() {
-      const model = poseDetection.SupportedModels.BlazePose
-      const detectorConfig = {
-        runtime: 'mediapipe',
-        solutionPath: 'https://cdn.jsdelivr.net/npm/@mediapipe/pose'
-      }
-      detectorRef.current = await poseDetection.createDetector(model, detectorConfig)
+  function onResults(results){
+    const canvasElement = canvasRef.current
+    const canvasCtx = canvasElement.getContext("2d")
+
+    canvasCtx.save();
+    canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+    canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
+
+    if (results.poseLandmarks) {
+      drawingUtils.drawConnectors(canvasCtx, results.poseLandmarks, pose.POSE_CONNECTIONS, { visibilityMin: 0.65, color: 'white' });
+      drawingUtils.drawLandmarks(canvasCtx, Object.values(pose.POSE_LANDMARKS_LEFT)
+          .map(index => results.poseLandmarks[index]), { visibilityMin: 0.65, color: 'white', fillColor: 'rgb(255,138,0)' });
+      drawingUtils.drawLandmarks(canvasCtx, Object.values(pose.POSE_LANDMARKS_RIGHT)
+          .map(index => results.poseLandmarks[index]), { visibilityMin: 0.65, color: 'white', fillColor: 'rgb(0,217,231)' });
+      drawingUtils.drawLandmarks(canvasCtx, Object.values(pose.POSE_LANDMARKS_NEUTRAL)
+          .map(index => results.poseLandmarks[index]), { visibilityMin: 0.65, color: 'white', fillColor: 'white' });
     }
-    createDetector()
-  }, [])
-
-  useEffect(() => {
-    const detectPose = async () => {
-      if (detectorRef.current && webcamRef.current && webcamRef.current.video) {
-        const videoElement = webcamRef.current.video
-
-        if (videoElement.readyState >= 2) {
-          try {
-            const poses = await detectorRef.current.estimatePoses(videoElement)
-            // Draw the poses
-            drawPoses(poses)
-          } catch (error) {
-            console.error(error)
-          }
-        }
-      }
-      requestAnimationFrame(detectPose)
-    }
-
-    detectPose()
-  }, [])
-
-  const drawPoses = (poses) => {
-    console.log(poses)
-    const canvas = canvasRef.current
-    const video = webcamRef.current.video
-
-    if (canvas && video) {
-      canvas.width = video.videoWidth
-      canvas.height = video.videoHeight
-
-      const ctx = canvas.getContext('2d')
-      if (ctx) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height)
-        poses.forEach((pose) => {
-          console.log(pose)
-          drawConnectors(
-            ctx,
-            pose.keypoints,
-            poseDetection.util.getAdjacentPairs(poseDetection.SupportedModels.BlazePose),
-            { color: '#00FF00', lineWidth: 4 }
-          )
-          drawLandmarks(ctx, pose.keypoints, { color: '#FF0000', lineWidth: 2 })
-        })
-      }
-    }
+    canvasCtx.restore();
   }
+
+  useEffect(() => {
+    if(!didLoad){
+      const mpPose = new pose.Pose({
+        locateFile: (file) => {
+            return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
+        },
+      });
+      mpPose.setOptions({
+        selfieMode: true,
+        modelComplexity: 1,
+        smoothLandmarks: true,
+        enableSegmentation: false,
+        smoothSegmentation: true,
+        minDetectionConfidence: 0.5,
+        minTrackingConfidence: 0.5,
+      });
+
+      camera = new cam.Camera(webcamRef.current, {
+        onFrame:async() => {
+          const canvasElement = canvasRef.current
+          const aspect = window.innerHeight / window.innerWidth;
+          let width, height;
+          if (window.innerWidth > window.innerHeight) {
+              height = window.innerHeight;
+              width = height / aspect;
+          }
+          else {
+              width = window.innerWidth;
+              height = width * aspect;
+          }
+          canvasElement.width = width;
+          canvasElement.height = height;
+          await mpPose.send({image: webcamRef.current});
+        }
+      })
+      camera.start();
+
+      mpPose.onResults((results) => smoothLandmarks(results, onResults));
+      setdidLoad(true)
+    }
+  },[didLoad])
+
+    
 
   return (
     <div style={{ position: 'relative' }}>
-      <Webcam ref={webcamRef} style={{ width: '640px', height: '480px' }} />
+      <video ref={webcamRef} style={{ width: '640px', height: '480px' }} />
       <canvas
         ref={canvasRef}
         style={{ position: 'absolute', left: '0px', top: '0px', zIndex: 50 }}
