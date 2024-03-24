@@ -1,80 +1,102 @@
+import React from 'react'
 import * as pose from '@mediapipe/pose'
-import smoothLandmarks from 'mediapipe-pose-smooth'; // ES6
-import * as cam from "@mediapipe/camera_utils"
-import * as drawingUtils from "@mediapipe/drawing_utils"
-import {useRef, useEffect, useState, useDebugValue} from "react"
-import Webcam from 'react-webcam';
-
+import smoothLandmarks from 'mediapipe-pose-smooth' // ES6
+import * as cam from '@mediapipe/camera_utils'
+import * as drawingUtils from '@mediapipe/drawing_utils'
+import { useRef, useEffect, useState } from 'react'
 
 const BlazePose: React.FC = () => {
-const webcamRef = useRef(null)
-  const canvasRef = useRef(null)
-  var camera = null
+  const webcamRef = useRef<HTMLVideoElement>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  let camera: cam.Camera | null = null
   const [didLoad, setdidLoad] = useState(false)
-
-  function onResults(results){
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function onResults(results: any): void {
     const canvasElement = canvasRef.current
-    const canvasCtx = canvasElement.getContext("2d")
+    if (!canvasElement) return
 
-    canvasCtx.save();
-    canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-    canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
+    const canvasCtx = canvasElement.getContext('2d')
+    if (!canvasCtx) return
+
+    canvasCtx.save()
+    canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height)
+    canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height)
 
     if (results.poseLandmarks) {
-      drawingUtils.drawConnectors(canvasCtx, results.poseLandmarks, pose.POSE_CONNECTIONS, { visibilityMin: 0.65, color: 'white' });
-      drawingUtils.drawLandmarks(canvasCtx, Object.values(pose.POSE_LANDMARKS_LEFT)
-          .map(index => results.poseLandmarks[index]), { visibilityMin: 0.65, color: 'white', fillColor: 'rgb(255,138,0)' });
-      drawingUtils.drawLandmarks(canvasCtx, Object.values(pose.POSE_LANDMARKS_RIGHT)
-          .map(index => results.poseLandmarks[index]), { visibilityMin: 0.65, color: 'white', fillColor: 'rgb(0,217,231)' });
-      drawingUtils.drawLandmarks(canvasCtx, Object.values(pose.POSE_LANDMARKS_NEUTRAL)
-          .map(index => results.poseLandmarks[index]), { visibilityMin: 0.65, color: 'white', fillColor: 'white' });
+      drawingUtils.drawConnectors(canvasCtx, results.poseLandmarks, pose.POSE_CONNECTIONS, {
+        visibilityMin: 0.65,
+        color: 'white'
+      })
+      drawingUtils.drawLandmarks(
+        canvasCtx,
+        Object.values(pose.POSE_LANDMARKS_LEFT).map((index) => results.poseLandmarks[index]),
+        { visibilityMin: 0.65, color: 'white', fillColor: 'rgb(255,138,0)' }
+      )
+      drawingUtils.drawLandmarks(
+        canvasCtx,
+        Object.values(pose.POSE_LANDMARKS_RIGHT).map((index) => results.poseLandmarks[index]),
+        { visibilityMin: 0.65, color: 'white', fillColor: 'rgb(0,217,231)' }
+      )
+      drawingUtils.drawLandmarks(
+        canvasCtx,
+        Object.values(pose.POSE_LANDMARKS_NEUTRAL).map((index) => results.poseLandmarks[index]),
+        { visibilityMin: 0.65, color: 'white', fillColor: 'white' }
+      )
     }
-    canvasCtx.restore();
+    canvasCtx.restore()
   }
 
   useEffect(() => {
-    if(!didLoad){
+    if (!didLoad) {
       const mpPose = new pose.Pose({
-        locateFile: (file) => {
-            return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
-        },
-      });
+        locateFile: (file): string => {
+          return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`
+        }
+      })
       mpPose.setOptions({
         selfieMode: true,
-        modelComplexity: 1,
+        modelComplexity: 2,
         smoothLandmarks: true,
         enableSegmentation: false,
         smoothSegmentation: true,
         minDetectionConfidence: 0.5,
-        minTrackingConfidence: 0.5,
-      });
-
-      camera = new cam.Camera(webcamRef.current, {
-        onFrame:async() => {
-          const canvasElement = canvasRef.current
-          const aspect = window.innerHeight / window.innerWidth;
-          let width, height;
-          if (window.innerWidth > window.innerHeight) {
-              height = window.innerHeight;
-              width = height / aspect;
-          }
-          else {
-              width = window.innerWidth;
-              height = width * aspect;
-          }
-          canvasElement.width = width;
-          canvasElement.height = height;
-          await mpPose.send({image: webcamRef.current});
-        }
+        minTrackingConfidence: 0.5
       })
-      camera.start();
 
-      mpPose.onResults((results) => smoothLandmarks(results, onResults));
-      setdidLoad(true)
+      if (webcamRef.current && canvasRef.current) {
+        camera = new cam.Camera(webcamRef.current, {
+          onFrame: async (): Promise<void> => {
+            const canvasElement = canvasRef.current
+            const aspect = window.innerHeight / window.innerWidth
+            let width, height
+            if (window.innerWidth > window.innerHeight) {
+              height = window.innerHeight
+              width = height / aspect
+            } else {
+              width = window.innerWidth
+              height = width * aspect
+            }
+            if (canvasElement) {
+              canvasElement.width = width
+              canvasElement.height = height
+            }
+            if (webcamRef.current) {
+              await mpPose.send({ image: webcamRef.current })
+            }
+          }
+        })
+        camera.start()
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        mpPose.onResults((results: any): void => {
+          smoothLandmarks(results, onResults)
+        })
+        setdidLoad(true)
+      }
     }
-  },[didLoad])
-
-    
+    return (): void => {
+      camera?.stop()
+    }
+  }, [didLoad])
 
   return (
     <div style={{ position: 'relative' }}>
