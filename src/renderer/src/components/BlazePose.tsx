@@ -1,3 +1,4 @@
+import React from 'react'
 import * as pose from '@mediapipe/pose'
 import smoothLandmarks from 'mediapipe-pose-smooth' // ES6
 import * as cam from '@mediapipe/camera_utils'
