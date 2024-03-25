@@ -1,7 +1,8 @@
 import React from 'react';
+import PostureDetection from './PostureDetection';
 
 const Home: React.FC = () => {
-    return <h1>Test Home</h1>
+    return <PostureDetection/>
 }
 
 export default Home
