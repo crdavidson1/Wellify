@@ -8,6 +8,7 @@ import { useRef, useEffect, useState } from 'react'
 const BlazePose: React.FC = () => {
   const webcamRef = useRef<HTMLVideoElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  // a 'union type' variable. Can either be of type cam.Camera or null. Initialise to a value of null.
   let camera: cam.Camera | null = null
   const [didLoad, setdidLoad] = useState(false)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
