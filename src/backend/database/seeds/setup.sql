@@ -1,0 +1,5 @@
+DROP DATABASE IF EXISTS wellify_test;
+DROP DATABASE IF EXISTS wellify;
+
+CREATE DATABASE wellify_test;
+CREATE DATABASE wellify;
