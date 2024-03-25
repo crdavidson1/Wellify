@@ -87,9 +87,7 @@ const BlazePose: React.FC = () => {
         })
         camera.start()
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        mpPose.onResults((results: any): void => {
-          smoothLandmarks(results, onResults)
-        })
+        mpPose.onResults(onResults)
         setdidLoad(true)
       }
     }
