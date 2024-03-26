@@ -1,6 +1,5 @@
 import React from 'react'
 import * as pose from '@mediapipe/pose'
-import smoothLandmarks from 'mediapipe-pose-smooth' // ES6
 import * as cam from '@mediapipe/camera_utils'
 import * as drawingUtils from '@mediapipe/drawing_utils'
 import { useRef, useEffect, useState } from 'react'
