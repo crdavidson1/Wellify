@@ -1,15 +1,46 @@
 import React from 'react';
+import { useState, useEffect } from "react";
 
 const Settings: React.FC = () => {
+    const [cameras, setCameras] = useState<string[]>([])
+    const [cameraRefresh, setCameraRefresh] = useState<boolean>()
+    let cameraDevices: string[] = []
+    useEffect(() => {
+        navigator.mediaDevices.enumerateDevices().then((devices)=>{
+            console.log(devices)
+            devices.forEach((device)=>{
+                if (device.kind === 'videoinput') {
+                    cameraDevices.push(device.label)
+                }})
+                setCameras(cameraDevices)
+                setCameraRefresh(false)
+        })
+    }, [cameraRefresh])
+    function reloadCamera(): void {
+        setCameraRefresh(true)
+    }
+
+
+
+
+
+
+
+
+
+    if (!cameraDevices) {
+        return <p>Please connect a camera device</p>
+    }
     return (
         <div>
             <br></br>
             <label>Camera: </label>
             <select name='Model Performance' id='model-performance'>
-                <option>Camera 1</option>
-                <option>Camera 2</option>
-                <option>Camera 3</option>
+                {cameras.map((camera)=>{
+                    return <option>{camera}</option>
+                })}
             </select>
+            <button onClick={reloadCamera}>Refresh</button>
             <br></br>
             <br></br>
             <label>Model Performance: </label>
