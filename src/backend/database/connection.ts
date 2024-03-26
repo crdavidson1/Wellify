@@ -1,9 +1,9 @@
 import { createPool, Pool } from 'mysql2/promise'
-import dotenv from 'dotenv'
+// import { dotenv } from 'dotenv'
 
-dotenv.config()
+// dotenv.config()
 
-const databaseName: string = process.env.NODE_ENV === 'test' ? 'wellify_test' : 'wellify'
+const databaseName: string = process.env.NODE_ENV === 'test' ? 'wellify_test' : 'wellify_db'
 
 const pool: Pool = createPool({
   host: process.env.DB_HOST || 'localhost',
