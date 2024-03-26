@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react'
 import { Routes, Route } from "react-router-dom";
 import Statistics from './components/Statistics';
 import Settings from './components/Settings';
@@ -9,12 +10,13 @@ import EmotionNotification from './components/EmotionNotification';
 import NotifButton from './components/NotifButton';
 
 const App: React.FC = () => {
+  const [settings, setSettings] = useState('')
   return (
     <div>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/settings/" element={<Settings />}/>
+        <Route path="/" element={<Home settings={settings}/>} />
+        <Route path="/settings/" element={<Settings settings={settings} setSettings={setSettings}/>}/>
         <Route path="/statistics" element={<Statistics />} />
         <Route path="/notifications" element={<><PostureNotification/><EmotionNotification/><NotifButton/></>} />
       </Routes>

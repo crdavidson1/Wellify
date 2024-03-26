@@ -1,13 +1,12 @@
 import React from 'react';
 import { useState, useEffect } from "react";
 
-const Settings: React.FC = () => {
+const Settings: React.FC<any> = ({settings, setSettings}) => {
     const [cameras, setCameras] = useState<string[]>([])
     const [cameraRefresh, setCameraRefresh] = useState<boolean>()
     let cameraDevices: string[] = []
     useEffect(() => {
         navigator.mediaDevices.enumerateDevices().then((devices)=>{
-            console.log(devices)
             devices.forEach((device)=>{
                 if (device.kind === 'videoinput') {
                     cameraDevices.push(device.label)
@@ -19,17 +18,11 @@ const Settings: React.FC = () => {
     function reloadCamera(): void {
         setCameraRefresh(true)
     }
-
-
-
-
-
-
-
-
-
     if (!cameraDevices) {
         return <p>Please connect a camera device</p>
+    }
+    function handleChange(event): void {
+        setSettings(event.target.value)
     }
     return (
         <div>
@@ -44,10 +37,10 @@ const Settings: React.FC = () => {
             <br></br>
             <br></br>
             <label>Model Performance: </label>
-            <select name='Model Performance' id='model-performance'>
-                <option>Lite</option>
-                <option>Full</option>
-                <option>Heavy</option>
+            <select value={settings} onChange={handleChange} id='model-performance'>
+                <option value='0'>Lite</option>
+                <option value='1'>Full</option>
+                <option value='2'>Heavy</option>
             </select>
             <br></br>
             <br></br>
