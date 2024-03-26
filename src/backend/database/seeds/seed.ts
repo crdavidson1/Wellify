@@ -1,8 +1,9 @@
 import { Pool } from 'mysql2/promise'
 import pool from './connection'
 
-const seed = async (data: any): Promise<void> => {
+const seed = async (pool: any): Promise<void> => {
   interface User {
+    userId: number
     username: string
     password: string
     name: string
@@ -47,6 +48,9 @@ const seed = async (data: any): Promise<void> => {
     time: Date
     sessionId: number
   }
+
+await pool.query ('DROP TABLE IF EXISTS slouch')
+await pool.query ('CREATE TABLE slouch (slouchId INT AUTO_INCREMENT PRIMARY KEY')
 }
 
 export default seed
