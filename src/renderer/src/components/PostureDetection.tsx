@@ -1,17 +1,22 @@
 import React from 'react'
 import * as pose from '@mediapipe/pose'
-import smoothLandmarks from 'mediapipe-pose-smooth' // ES6
 import * as cam from '@mediapipe/camera_utils'
 import * as drawingUtils from '@mediapipe/drawing_utils'
 import { useRef, useEffect, useState } from 'react'
+import Slouch from './Posture/Slouch'
 
 const BlazePose: React.FC = () => {
   const webcamRef = useRef<HTMLVideoElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [postureData, setPostureData] = useState(null)
+  const [startPosition, setStartPosition] = useState(null)
+  const [sessionRunning, setSessionRunning] = useState(false)
+  const [slouchCount, setSlouchCount] = useState(0)
   let camera: cam.Camera | null = null
   const [didLoad, setdidLoad] = useState(false)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function onResults(results: any): void {
+    setPostureData(results)
     const canvasElement = canvasRef.current
     if (!canvasElement) return
 
@@ -96,14 +101,44 @@ const BlazePose: React.FC = () => {
     }
   }, [didLoad])
 
+  const handleClick = (): void => {
+    if (!sessionRunning) {
+      console.log('session started')
+      setStartPosition(postureData)
+      setSessionRunning(true)
+    } else return
+  }
+
   return (
-    <div style={{ position: 'relative' }}>
-      <video ref={webcamRef} style={{ width: '640px', height: '480px' }} />
-      <canvas
-        ref={canvasRef}
-        style={{ position: 'absolute', left: '0px', top: '0px', zIndex: 50 }}
+    <>
+      <div style={{ position: 'relative', maxWidth: '640px', maxHeight: '480px' }}>
+        <video ref={webcamRef} style={{ width: '640px', height: '480px' }} />
+        <canvas
+          ref={canvasRef}
+          style={{
+            position: 'absolute',
+            left: '0px',
+            top: '0px',
+            zIndex: 50,
+            width: '640px',
+            height: '480px'
+          }}
+        />
+      </div>
+      <button
+        onClick={() => {
+          handleClick()
+        }}
+      >
+        Start Session
+      </button>
+      <Slouch
+        postureData={postureData}
+        startPosition={startPosition}
+        setSlouchCount={setSlouchCount}
+        slouchCount={slouchCount}
       />
-    </div>
+    </>
   )
 }
 
