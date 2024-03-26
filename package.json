@@ -6,8 +6,8 @@
   "author": "example.com",
   "homepage": "https://electron-vite.org",
   "scripts": {
-    "setup-dbs":"mysql -u snack_overflow -p < ./src/backend/database/seeds/setup.sql",
-    "seed": "node ./src/backend/database/seeds/runSeed.ts",
+    "setup-dbs": "mysql < ./src/backend/database/seeds/setup.sql",
+    "seed": "ts-node ./src/backend/database/seeds/runSeed.ts",
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
     "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
@@ -65,6 +65,7 @@
     "react-dom": "^18.2.0",
     "react-test-renderer": "^18.2.0",
     "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.3",
     "vite": "^5.0.12"
   }

@@ -1,3 +1,4 @@
-const devData: string = 'placeholder'
+import slouchData from './slouch'
 
+const devData = { slouchData }
 export default devData
