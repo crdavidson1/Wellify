@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState } from 'react'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,9 +9,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
 import { Pie } from 'react-chartjs-2';
-import {faker} from '@faker-js/faker';
 
 ChartJS.register(
   CategoryScale,
@@ -37,8 +34,6 @@ const EmotionChart: React.FC = () => {
         },
     },
     };
-
-    const labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
     const data2 = {
     labels: ['Happy', 'Sad', 'Angry', 'Fear', 'Disgust', 'Neutral'],

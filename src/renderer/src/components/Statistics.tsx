@@ -26,7 +26,7 @@ const Statistics: React.FC = () => {
         <br></br>
         <label>Select a chart: </label>
             <select value={chartType} onChange={handleChange} name='Select Chart' id='model-performance'>
-                <option value={'1'}>Slouches This Week</option>
+                <option value='1'>Slouches This Week</option>
                 <option value='2'>Emotions This Week</option>
                 <option value='3'>Emotions By Application</option>
             </select>
