@@ -8,6 +8,7 @@ const LookAway = ({
   setNotLookedAwayCount
 }: any): void => {
   if (postureData && startPosition) {
+
     const width: number = startPosition.poseLandmarks[7].x - startPosition.poseLandmarks[0].x
     const height: number = startPosition.poseLandmarks[5].y - startPosition.poseLandmarks[10].y
 

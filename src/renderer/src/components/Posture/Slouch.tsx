@@ -37,7 +37,9 @@ const Slouch = ({ postureData, startPosition, slouchCount, setSlouchCount }: any
       }
     }, [postureData])
   }
+
   if (slouchCount > 100) {
+
     setSlouchCount(0)
     Notifier('Posture Alert', 'Please sit up straight, you have been slouching')
   }

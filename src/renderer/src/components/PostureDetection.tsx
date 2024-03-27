@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import * as pose from '@mediapipe/pose'
 import * as cam from '@mediapipe/camera_utils'
 import * as drawingUtils from '@mediapipe/drawing_utils'
 import { useRef, useEffect, useState } from 'react'
 import Slouch from './Posture/Slouch'
 import LookAway from './Posture/LookAway'
+import { UserContext } from '@renderer/contexts/User'
 
-const PostureDetection: React.FC = () => {
+const PostureDetection: React.FC <any> = () => {
+  const {modelComplexity } = useContext(UserContext)
   const webcamRef = useRef<HTMLVideoElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   let camera: cam.Camera | null = null
@@ -57,7 +59,6 @@ const PostureDetection: React.FC = () => {
     }
     canvasCtx.restore()
   }
-
   useEffect(() => {
     if (!hasLoaded) {
       const mpPose = new pose.Pose({
@@ -67,7 +68,7 @@ const PostureDetection: React.FC = () => {
       })
       mpPose.setOptions({
         selfieMode: true,
-        modelComplexity: 2,
+        modelComplexity: modelComplexity,
         smoothLandmarks: true,
         enableSegmentation: false,
         smoothSegmentation: true,
