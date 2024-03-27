@@ -20,9 +20,7 @@ const Slouch = ({ postureData, startPosition, slouchCount, setSlouchCount }: any
       })
     }
   }
-  console.log(slouchCount)
   if (slouchCount > 10000) {
-    console.log('oi oi oi oi ')
     setSlouchCount(0)
     Notifier('Posture Alert', 'Please sit up straight, you have been slouching')
   }
