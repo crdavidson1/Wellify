@@ -5,7 +5,7 @@ import * as drawingUtils from '@mediapipe/drawing_utils'
 import { useRef, useEffect, useState } from 'react'
 import Slouch from './Posture/Slouch'
 
-const BlazePose: React.FC<any> = ({settings}) => {
+const BlazePose: React.FC <any> = ({ settings }) => {
   const webcamRef = useRef<HTMLVideoElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [postureData, setPostureData] = useState(null)
@@ -50,7 +50,9 @@ const BlazePose: React.FC<any> = ({settings}) => {
     }
     canvasCtx.restore()
   }
+  console.log(settings)
   const modelComplexity = Number(settings)
+  console.log(modelComplexity)
   useEffect(() => {
     if (!didLoad) {
       const mpPose = new pose.Pose({
@@ -60,7 +62,7 @@ const BlazePose: React.FC<any> = ({settings}) => {
       })
       mpPose.setOptions({
         selfieMode: true,
-        modelComplexity: modelComplexity,
+        modelComplexity: 1,
         smoothLandmarks: true,
         enableSegmentation: false,
         smoothSegmentation: true,
@@ -143,4 +145,3 @@ const BlazePose: React.FC<any> = ({settings}) => {
 }
 
 export default BlazePose
-
