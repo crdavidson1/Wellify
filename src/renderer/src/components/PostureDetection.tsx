@@ -143,3 +143,4 @@ const BlazePose: React.FC<any> = ({settings}) => {
 }
 
 export default BlazePose
+
