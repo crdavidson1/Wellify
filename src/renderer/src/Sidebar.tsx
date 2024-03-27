@@ -1,5 +1,5 @@
 import React from 'react';
-import { Drawer, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Drawer, List, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import BarChartIcon from '@mui/icons-material/BarChart';
@@ -10,6 +10,10 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 const Sidebar: React.FC = () => {
   return (
       <Drawer variant="permanent">
+        <div>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1, textAlign: 'center', marginTop: '20px' }}>
+            Wellify
+          </Typography>
           <List>
               <ListItemButton component={Link} to="/">
                   <ListItemIcon>
@@ -36,6 +40,7 @@ const Sidebar: React.FC = () => {
                   <ListItemText primary="Notifications" />
               </ListItemButton>
           </List>
+          </div>
       </Drawer>
   );
 }
