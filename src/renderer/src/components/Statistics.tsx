@@ -23,6 +23,7 @@ const Statistics: React.FC = () => {
 
   return (
     <div style={{height:'400px'}}>
+        <br></br>
         <label>Select a chart: </label>
             <select value={chartType} onChange={handleChange} name='Select Chart' id='model-performance'>
                 <option value={'1'}>Slouches This Week</option>
