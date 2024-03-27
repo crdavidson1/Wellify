@@ -6,9 +6,11 @@ import { useRef, useEffect, useState } from 'react'
 import Slouch from './Posture/Slouch'
 import LookAway from './Posture/LookAway'
 import { UserContext } from '@renderer/contexts/User'
+import EyeDistance from './Posture/EyeDistance'
 
-const PostureDetection: React.FC <any> = () => {
-  const {modelComplexity } = useContext(UserContext)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const PostureDetection: React.FC<any> = () => {
+  const { modelComplexity } = useContext(UserContext)
   const webcamRef = useRef<HTMLVideoElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   let camera: cam.Camera | null = null
@@ -18,6 +20,7 @@ const PostureDetection: React.FC <any> = () => {
   const [sessionRunning, setSessionRunning] = useState(false)
   const [slouchCount, setSlouchCount] = useState(0)
   const [notLookedAwayCount, setNotLookedAwayCount] = useState(0)
+  const [tooCloseCount, setTooCloseCount] = useState(0)
   const [hasLoaded, setHasLoaded] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -121,8 +124,9 @@ const PostureDetection: React.FC <any> = () => {
       console.log('session stopped')
     }
   }
-console.log(slouchCount, 'slouch')
-console.log(notLookedAwayCount, 'look')
+  console.log(slouchCount, 'slouch')
+  console.log(notLookedAwayCount, 'look')
+  console.log(tooCloseCount, 'distance')
   return (
     <>
       <div style={{ width: '640px', height: '480px', position: 'relative' }}>
@@ -189,6 +193,12 @@ console.log(notLookedAwayCount, 'look')
         startPosition={startPosition}
         notLookedAwayCount={notLookedAwayCount}
         setNotLookedAwayCount={setNotLookedAwayCount}
+      />
+      <EyeDistance
+        postureData={postureData}
+        startPosition={startPosition}
+        tooCloseCount={tooCloseCount}
+        setTooCloseCount={setTooCloseCount}
       />
     </>
   )

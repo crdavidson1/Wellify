@@ -6,9 +6,9 @@ const LookAway = ({
   startPosition,
   notLookedAwayCount,
   setNotLookedAwayCount
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }: any): void => {
   if (postureData && startPosition) {
-
     const width: number = startPosition.poseLandmarks[7].x - startPosition.poseLandmarks[0].x
     const height: number = startPosition.poseLandmarks[5].y - startPosition.poseLandmarks[10].y
 
