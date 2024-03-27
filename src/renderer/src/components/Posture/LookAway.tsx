@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import Notifier from '../../utils/Notifier'
 
 const LookAway = ({
@@ -7,31 +8,48 @@ const LookAway = ({
   setNotLookedAwayCount
 }: any): void => {
   if (postureData && startPosition) {
-  }
-  //     const width: number = startPosition.poseLandmarks[0].y - startPosition.poseLandmarks[12].y
 
-  //     if (postureData.poseLandmarks[0].y > startPosition.poseLandmarks[0].y - height * 0.2) {
-  //       setSlouchCount((currCount) => {
-  //         return currCount + 1
-  //       })
-  //     }
-  //     if (postureData.poseLandmarks[12].y > startPosition.poseLandmarks[12].y - height * 0.1) {
-  //       setSlouchCount((currCount) => {
-  //         return currCount + 1
-  //       })
-  //     }
-  //     if (postureData.poseLandmarks[11].y > startPosition.poseLandmarks[11].y - height * 0.1) {
-  //       setSlouchCount((currCount) => {
-  //         return currCount + 1
-  //       })
-  //     }
-  //   }
-  //   console.log(slouchCount)
-  //   if (slouchCount > 10000) {
-  //     console.log('oi oi oi oi ')
-  //     setSlouchCount(0)
-  //     Notifier('Posture Alert', 'Please sit up straight, you have been slouching')
-  //   }
+    const width: number = startPosition.poseLandmarks[7].x - startPosition.poseLandmarks[0].x
+    const height: number = startPosition.poseLandmarks[5].y - startPosition.poseLandmarks[10].y
+
+    useEffect(() => {
+      if (postureData.poseLandmarks[0].x - postureData.poseLandmarks[8].x < width * 0.8) {
+        setNotLookedAwayCount((currCount) => {
+          if (currCount >= 10) {
+            return currCount - 10
+          } else {
+            return 0
+          }
+        })
+      }
+      if (postureData.poseLandmarks[0].x - postureData.poseLandmarks[8].x > width * 1.2) {
+        setNotLookedAwayCount((currCount) => {
+          if (currCount >= 10) {
+            return currCount - 10
+          } else {
+            return 0
+          }
+        })
+      }
+      if (postureData.poseLandmarks[0].y < startPosition.poseLandmarks[0].y + height * 0.2) {
+        setNotLookedAwayCount((currCount) => {
+          if (currCount >= 10) {
+            return currCount - 10
+          } else {
+            return 0
+          }
+        })
+      } else {
+        setNotLookedAwayCount((currCount) => {
+          return currCount + 1
+        })
+      }
+    }, [postureData])
+  }
+  if (notLookedAwayCount > 100) {
+    setNotLookedAwayCount(0)
+    Notifier('Eye Health Alert', 'Please take a moment to look away from your screen')
+  }
   return
 }
 
