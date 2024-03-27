@@ -97,14 +97,37 @@ const BlazePose: React.FC = () => {
   }, [didLoad])
 
   return (
-    <div style={{ position: 'relative' }}>
-      <video ref={webcamRef} style={{ width: '640px', height: '480px' }} />
-      <canvas
-        ref={canvasRef}
-        style={{ position: 'absolute', left: '0px', top: '0px', zIndex: 50 }}
-      />
-    </div>
+    <>
+      <div style={{ position: 'relative', maxWidth: '640px', maxHeight: '480px' }}>
+        <video ref={webcamRef} style={{ width: '640px', height: '480px' }} />
+        <canvas
+          ref={canvasRef}
+          style={{
+            position: 'absolute',
+            left: '0px',
+            top: '0px',
+            zIndex: 50,
+            width: '640px',
+            height: '480px'
+          }}
+        />
+      </div>
+      {/* <button
+        onClick={() => {
+          handleClick()
+        }}
+      >
+        Start Session
+      </button>
+      <Slouch
+        postureData={postureData}
+        startPosition={startPosition}
+        setSlouchCount={setSlouchCount}
+        slouchCount={slouchCount}
+      /> */}
+    </>
   )
 }
 
 export default BlazePose
+
