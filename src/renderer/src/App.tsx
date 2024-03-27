@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Statistics from './components/Statistics'
 import Settings from './components/Settings'
@@ -10,6 +11,7 @@ import NotifButton from './components/NotifButton'
 import Sidebar from './Sidebar'
 
 const App: React.FC = () => {
+  const [settings, setSettings] = useState('')
   return (
     <div
       style={{ display: 'flex', flexDirection: 'column', minHeight: '20rem', minWidth: '20rem' }}
@@ -33,7 +35,6 @@ const App: React.FC = () => {
           />
         </Routes>
       </div>
-    </div>
   )
 }
 
