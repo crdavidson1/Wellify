@@ -1,14 +1,13 @@
-import devData from '../data/devData/index'
+const testData = require('../data/testData/index') 
 import seed from './seed'
 import pool from '../connection'
 
-const runSeed = async (): Promise<void> => {
+const runSeed = (): void => {
   try {
-    await seed(devData)
-  } catch (error) {
+    seed(testData)
+  }
+  catch (error) {
     console.error(error)
-  } finally {
-    await pool.end()
   }
 }
 

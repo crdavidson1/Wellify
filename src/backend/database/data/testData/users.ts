@@ -1,4 +1,4 @@
-export const testUser = [
+module.exports = [
 {
     username: 'Merry_Marianna',
     password: 'hushhush',

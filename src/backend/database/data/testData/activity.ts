@@ -1,4 +1,4 @@
-export const testActivity = [
+module.exports = [
 {
     activityId: 1,
     appName: 'facebook'

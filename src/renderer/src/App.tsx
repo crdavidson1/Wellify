@@ -13,7 +13,7 @@ const App: React.FC = () => {
   return (
     <div>
       <Header />
-      <Sidebar />
+      {/* <Sidebar /> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/settings" element={<Settings />}/>
