@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import SingleBarComponent from "./SingleBar";
 
 
 const EmotionBarsComponent = () => {

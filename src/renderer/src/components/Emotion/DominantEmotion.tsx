@@ -15,8 +15,7 @@ const DominantEmotion = () => {
   }
   return (
     <div >
-    <p style={{fontSize:"20px"}}>DominantEmotion Component:</p>
-     <p>{dominantEmotion}</p>
+    <p style={{fontSize:"20px"}}>Dominant Emotion: {dominantEmotion}</p>
     </div>
   );
 };

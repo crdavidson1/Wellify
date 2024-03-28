@@ -11,20 +11,16 @@ import EmotionBarsComponent from './Emotion/EmotionBars';
 const EmotionTracking: React.FC<any> = ({webcamRef}) => {
  const mphToolsState = useExternalScript("https://sdk.morphcast.com/mphtools/v1.0/mphtools.js");
   const aiSdkState = useExternalScript("https://ai-sdk.morphcast.com/v1.16/ai-sdk.js");
-  const videoEl = useRef(undefined)
 
   useEffect(() => {
-    videoEl.current = document.getElementById("webcamRef");
-    console.log(document.getElementById('webcamRef'))
-    console.log(webcamRef)
+    webcamRef = document.getElementById("webcamRef");
     async function getAiSdk (){
       if(aiSdkState === "ready" && mphToolsState === "ready"){
         const { source, start } = await getAiSdkControls();
       await source.useCamera({
-        toVideoElement: document.getElementById("videoEl"),
+        toVideoElement: document.getElementById("webcamRef"),
       });
         await start();
-        
       }
      
     }
@@ -35,8 +31,8 @@ const EmotionTracking: React.FC<any> = ({webcamRef}) => {
     <div className="App">
       <header className="App-header">
         <div style={{display:"flex", flexDirection: "column", alignItems:"center"}}>  
-            <FaceTrackerComponent videoEl={videoEl}></FaceTrackerComponent>
-          <DominantEmotion></DominantEmotion>
+            <FaceTrackerComponent webcamRef={webcamRef}></FaceTrackerComponent>
+          <DominantEmotion/>
         </div>
       </header>
     </div>
