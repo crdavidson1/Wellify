@@ -72,7 +72,7 @@ const PostureDetection: React.FC<any> = ({ webcamRef }) => {
       })
       mpPose.setOptions({
         selfieMode: true,
-        modelComplexity: modelComplexity,
+        modelComplexity: 2,
         smoothLandmarks: true,
         enableSegmentation: false,
         smoothSegmentation: true,
