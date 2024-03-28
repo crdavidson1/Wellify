@@ -22,17 +22,13 @@ const Settings: React.FC = () => {
     setCameraRefresh(true)
     }
     if (!cameraDevices) {
-    return <p>Please connect a camera device</p>
+      return <p>Please connect a camera device</p>
     }
     function handleChange(event): void {
-    setModelComplexity(Number(event.target.value))
+      setModelComplexity(Number(event.target.value))
     }
     return (
-    <div
-      style={{
-        paddingLeft: '180px'
-      }}
-    >
+    <div style={{paddingLeft: '180px'}}>
         <br></br>
         <label>Camera: </label>
         <select name="Model Performance" id="model-performance">
@@ -45,17 +41,17 @@ const Settings: React.FC = () => {
         <br></br>
         <label>Model Performance: </label>
         <select value={modelComplexity} onChange={handleChange} id="model-performance">
-        <option key='0' value="0">Lite</option>
-        <option key='1' value="1">Full</option>
-        <option key='2' value="2">Heavy</option>
+          <option key='0' value="0">Lite</option>
+          <option key='1' value="1">Full</option>
+          <option key='2' value="2">Heavy</option>
         </select>
         <br></br>
         <br></br>
         <label>Posture Strictness: </label>
         <select name="Posture Strictness" id="posture-strictness">
-        <option>Low</option>
-        <option>Medium</option>
-        <option>High</option>
+          <option>Low</option>
+          <option>Medium</option>
+          <option>High</option>
         </select>
     </div>
   )

@@ -22,11 +22,7 @@ const Statistics: React.FC = () => {
     }
 
   return (
-    <div
-      style={{
-        paddingLeft: '180px'
-      }}
-    >
+    <div style={{paddingLeft: '180px'}}>
         <br></br>
         <label>Select a chart: </label>
             <select value={chartType} onChange={handleChange} name='Select Chart' id='model-performance'>

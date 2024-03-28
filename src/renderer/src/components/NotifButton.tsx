@@ -11,9 +11,12 @@ const NotifButton: React.FC = () => {
     })
   }
   return (
-    <button id='trigger' onClick={handleClick}>
+    <div style={{paddingLeft: '180px'}}>
+    <button id="trigger" onClick={handleClick}>
       Trigger Notification
     </button>
+    </div>
+
   )
 }
 
