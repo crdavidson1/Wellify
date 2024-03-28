@@ -57,10 +57,10 @@ const EmotionChart: React.FC = () => {
   return (
     <div
       style={{
-        width: 'calc(100vw - 20rem)',
-        height: '50%',
+        width: 'calc(100vw - 40rem)',
+        height: '30%',
         display: 'flex',
-        paddingLeft: '15rem',
+        paddingLeft: '25rem',
         paddingTop: '2rem'
       }}
     >
