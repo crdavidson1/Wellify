@@ -13,6 +13,7 @@ const PostureDetection: React.FC<any> = ({ webcamRef }) => {
   const { modelComplexity } = useContext(UserContext)
   // const webcamRef = useRef<HTMLVideoElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  // a 'union type' variable. Can either be of type cam.Camera or null. Initialise to a value of null.
   let camera: cam.Camera | null = null
 
   const [postureData, setPostureData] = useState(null)

@@ -1,5 +1,8 @@
 const NotifButton: React.FC = () => {
-  function handleClick(): void {
+  async function handleClick(): Promise<void> {
+    const res = await window.wellifyAPI.check()
+    console.log(res);
+
     Notification.requestPermission().then(() => {
       const NOTIFICATION_TITLE = 'Title'
       const NOTIFICATION_BODY = 'Notification from the Renderer process. Click to log to console.'
