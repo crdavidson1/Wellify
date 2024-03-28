@@ -15,7 +15,6 @@ const DominantEmotion = () => {
 
   function bindEvents(){
     window.addEventListener("CY_FACE_EMOTION_RESULT", (evt: CustomEvent) => {
-      console.log(evt)
       setDominantEmotion((evt).detail.output.dominantEmotion || "") ;
     });
   }
