@@ -20,7 +20,7 @@ export const UserProvider: React.FC<any> = ({ children }) => {
   const saved = JSON.parse(localStorage.getItem('currentUser') || '1')
   const [modelComplexity, setModelComplexity] = useState(saved)
   const [camera, setCamera] = useState('')
-  const [postureStrictness, setPostureStrictness] = useState('')
+  const [postureStrictness, setPostureStrictness] = useState('Medium')
   return (
     <UserContext.Provider value={{ modelComplexity, setModelComplexity, camera, setCamera, postureStrictness, setPostureStrictness }}>
       {children}

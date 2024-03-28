@@ -20,6 +20,9 @@ const Settings: React.FC = () => {
         }
       })
       setCameras(cameraDevices)
+      if (!camera) {
+        setCamera(cameraDevices[0])
+      }
       setCameraRefresh(false)
     })
   }, [cameraRefresh])
