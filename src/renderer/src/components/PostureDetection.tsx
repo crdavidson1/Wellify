@@ -9,9 +9,9 @@ import { UserContext } from '@renderer/contexts/User'
 import EyeDistance from './Posture/EyeDistance'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const PostureDetection: React.FC<any> = () => {
+const PostureDetection: React.FC<any> = ({ webcamRef }) => {
   const { modelComplexity } = useContext(UserContext)
-  const webcamRef = useRef<HTMLVideoElement>(null)
+  // const webcamRef = useRef<HTMLVideoElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   let camera: cam.Camera | null = null
 
@@ -122,11 +122,9 @@ const PostureDetection: React.FC<any> = () => {
       setSlouchCount(0)
       setNotLookedAwayCount(0)
       console.log('session stopped')
+      camera?.stop()
     }
   }
-  console.log(slouchCount, 'slouch')
-  console.log(notLookedAwayCount, 'look')
-  console.log(tooCloseCount, 'distance')
   return (
     <>
       <div style={{ width: '640px', height: '480px', position: 'relative' }}>
