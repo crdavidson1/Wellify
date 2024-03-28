@@ -4,7 +4,7 @@ services:
     image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: wellify_db
+      MYSQL_DATABASE: wellify_test
       MYSQL_USER: snack_overflow
       MYSQL_PASSWORD: Ccgnx2024!
     ports:
