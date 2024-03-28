@@ -1,4 +1,3 @@
-
 const NotifButton: React.FC = () => {
   async function handleClick(): Promise<void> {
     const res = await window.wellifyAPI.check()
@@ -12,9 +11,12 @@ const NotifButton: React.FC = () => {
     })
   }
   return (
-    <button id='trigger' onClick={handleClick}>
+    <div style={{paddingLeft: '180px'}}>
+    <button id="trigger" onClick={handleClick}>
       Trigger Notification
     </button>
+    </div>
+
   )
 }
 

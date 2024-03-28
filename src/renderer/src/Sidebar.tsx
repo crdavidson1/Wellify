@@ -1,40 +1,50 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
+import React from 'react'
+import { Drawer, List, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material'
+import { Link } from 'react-router-dom'
+import HomeIcon from '@mui/icons-material/Home'
+import BarChartIcon from '@mui/icons-material/BarChart'
+import SettingsIcon from '@mui/icons-material/Settings'
+import NotificationsIcon from '@mui/icons-material/Notifications'
 
 const Sidebar: React.FC = () => {
   return (
-    <Drawer
-      sx={{
-        width: 240,
-        flexShrink: 0,
-        '& .MuiDrawer-paper': {
-          width: 240,
-          boxSizing: 'border-box',
-        },
-      }}
-      variant="permanent"
-      anchor="left"
-    >
-      <List>
-        <ListItemButton component={Link} to="/">
-          <ListItemText primary="Home" />
-        </ListItemButton>
-        <ListItemButton component={Link} to="/settings">
-          <ListItemText primary="Settings" />
-        </ListItemButton>
-        <ListItemButton component={Link} to="/statistics">
-          <ListItemText primary="Statistics" />
-        </ListItemButton>
-        <ListItemButton component={Link} to="/notifications">
-          <ListItemText primary="Notifications" />
-        </ListItemButton>
-      </List>
+    <Drawer variant="permanent">
+      <div>
+        <Typography
+          variant="h6"
+          component="div"
+          sx={{ flexGrow: 1, textAlign: 'center', marginTop: '20px' }}
+        >
+          Wellify
+        </Typography>
+        <List>
+          <ListItemButton component={Link} to="/">
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItemButton>
+          <ListItemButton component={Link} to="/statistics">
+            <ListItemIcon>
+              <BarChartIcon />
+            </ListItemIcon>
+            <ListItemText primary="Statistics" />
+          </ListItemButton>
+          <ListItemButton component={Link} to="/settings">
+            <ListItemIcon>
+              <SettingsIcon />
+            </ListItemIcon>
+            <ListItemText primary="Settings" />
+          </ListItemButton>
+          <ListItemButton component={Link} to="/notifications">
+            <ListItemIcon>
+              <NotificationsIcon />
+            </ListItemIcon>
+            <ListItemText primary="Notifications" />
+          </ListItemButton>
+        </List>
+      </div>
     </Drawer>
-  );
-};
-
-export default Sidebar;
+  )
+}
+export default Sidebar
