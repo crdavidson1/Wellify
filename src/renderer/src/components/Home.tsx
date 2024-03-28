@@ -1,7 +1,10 @@
 import React from 'react'
+import { useRef } from 'react'
 import PostureDetection from './PostureDetection'
+import EmotionTracking from './EmotionTracking'
 
-const Home: React.FC<any> = ({ settings }) => {
+const Home: React.FC<any> = () => {
+  const webcamRef = useRef<HTMLVideoElement>(null)
   return (
     <div
       style={{
@@ -14,7 +17,21 @@ const Home: React.FC<any> = ({ settings }) => {
       }}
     >
       <div>
-        <PostureDetection settings={settings} />
+        <video
+          ref={webcamRef}
+          muted
+          autoPlay
+          playsInline
+          style={{
+            position: 'absolute',
+            width: '640px',
+            height: '480px',
+            zIndex: 10, // Ensure the video is under the canvas
+            transform: 'scaleX(-1)' // Flip the video horizontally
+          }}
+        />
+        <PostureDetection webcamRef={webcamRef}/>
+        <EmotionTracking webcamRef={webcamRef}/>
       </div>
     </div>
   )
