@@ -31,7 +31,7 @@ const Home: React.FC<any> = () => {
           }}
         />
         <PostureDetection webcamRef={webcamRef}/>
-        {/* <EmotionTracking webcamRef={webcamRef}/> */}
+        <EmotionTracking webcamRef={webcamRef}/>
       </div>
     </div>
   )

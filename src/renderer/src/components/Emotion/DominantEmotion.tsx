@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
 
+declare global {
+    interface WindowEventMap {
+        'CY_FACE_EMOTION_RESULT': CustomEvent;
+    }
+}
 
 const DominantEmotion = () => {
   const [dominantEmotion, setDominantEmotion] = useState("");
@@ -9,8 +14,9 @@ const DominantEmotion = () => {
   }, []);
 
   function bindEvents(){
-    window.addEventListener("CY_FACE_EMOTION_RESULT", (evt) => {
-      setDominantEmotion(evt.detail.output.dominantEmotion || "") ;
+    window.addEventListener("CY_FACE_EMOTION_RESULT", (evt: CustomEvent) => {
+      console.log(evt)
+      setDominantEmotion((evt).detail.output.dominantEmotion || "") ;
     });
   }
   return (

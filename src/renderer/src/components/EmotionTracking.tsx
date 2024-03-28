@@ -1,12 +1,8 @@
 import React from 'react';
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useExternalScript } from "./Emotion/externalScriptsLoader";
 import { getAiSdkControls } from "./Emotion/loader";
-import EngagementComponent from './Emotion/Engagement';
 import DominantEmotion from './Emotion/DominantEmotion';
-import FaceTrackerComponent from './Emotion/FaceTracker';
-import MoodComponent from './Emotion/Mood';
-import EmotionBarsComponent from './Emotion/EmotionBars';
 
 const EmotionTracking: React.FC<any> = ({webcamRef}) => {
  const mphToolsState = useExternalScript("https://sdk.morphcast.com/mphtools/v1.0/mphtools.js");
@@ -28,14 +24,9 @@ const EmotionTracking: React.FC<any> = ({webcamRef}) => {
   }, [aiSdkState, mphToolsState]);
 
   return (
-    <div className="App">
-      <header className="App-header">
         <div style={{display:"flex", flexDirection: "column", alignItems:"center"}}>  
-            <FaceTrackerComponent webcamRef={webcamRef}></FaceTrackerComponent>
           <DominantEmotion/>
         </div>
-      </header>
-    </div>
   );
 }
 
