@@ -49,12 +49,12 @@ const PostureDetection: React.FC<any> = ({ webcamRef }) => {
       drawingUtils.drawLandmarks(
         canvasCtx,
         Object.values(pose.POSE_LANDMARKS_LEFT).map((index) => results.poseLandmarks[index]),
-        { visibilityMin: 0.65, color: 'white', fillColor: 'rgb(255,138,0)' }
+        { visibilityMin: 0.65, color: 'white', fillColor: 'rgb(0,100,197)' }
       )
       drawingUtils.drawLandmarks(
         canvasCtx,
         Object.values(pose.POSE_LANDMARKS_RIGHT).map((index) => results.poseLandmarks[index]),
-        { visibilityMin: 0.65, color: 'white', fillColor: 'rgb(0,217,231)' }
+        { visibilityMin: 0.65, color: 'white', fillColor: 'rgb(137,201,251)' }
       )
       drawingUtils.drawLandmarks(
         canvasCtx,
@@ -140,7 +140,7 @@ const PostureDetection: React.FC<any> = ({ webcamRef }) => {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              backgroundColor: 'rgba(173, 216, 230, 0.5)'
+              backgroundColor: 'rgba(137, 201, 251, 0.5)'
             }}
           >
             <h2 style={{ color: '#fff' }}>Loading...</h2>
