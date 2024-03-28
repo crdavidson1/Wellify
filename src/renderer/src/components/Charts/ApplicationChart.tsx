@@ -81,7 +81,7 @@ const ApplicationChart: React.FC = () => {
         paddingTop: '2rem'
       }}
     >
-      <Bar options={options3} data={data3} />;
+      <Bar options={options3} data={data3} />
     </div>
   )
 }

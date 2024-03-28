@@ -173,26 +173,26 @@ const PostureDetection: React.FC<any> = ({ webcamRef }) => {
         />
       </div>
 
-    {isLoading ? null : (
-      <Button
-        variant="contained"
-        style={{
-          position: 'absolute',
-          marginTop: '15px',
-          marginLeft: '250px'
-        }}
-        sx={{
-          bgcolor: '#0064C5',
-          '&:hover': {
-            bgcolor: '#89c9fb'
-          }
-        }}
-        onClick={() => {
-          handleClick()
-        }}
-      >
-        {sessionRunning ? 'Stop Session' : 'Start Session'}
-      </Button>
+      {isLoading ? null : (
+        <Button
+          variant="contained"
+          style={{
+            position: 'absolute',
+            marginTop: '55px',
+            marginLeft: '250px'
+          }}
+          sx={{
+            bgcolor: '#0064C5',
+            '&:hover': {
+              bgcolor: '#89c9fb'
+            }
+          }}
+          onClick={() => {
+            handleClick()
+          }}
+        >
+          {sessionRunning ? 'Stop Session' : 'Start Session'}
+        </Button>
       )}
 
       <Slouch
