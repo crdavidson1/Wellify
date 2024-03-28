@@ -8,7 +8,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications'
 
 const Sidebar: React.FC = () => {
   return (
-    <Drawer variant="permanent">
+    <Drawer PaperProps={{ sx: { backgroundColor: '#E2F2FD' } }} variant="permanent">
       <div>
         <Typography
           variant="h6"

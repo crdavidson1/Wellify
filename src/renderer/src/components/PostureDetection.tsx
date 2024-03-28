@@ -2,6 +2,7 @@ import React from 'react'
 import * as pose from '@mediapipe/pose'
 import * as cam from '@mediapipe/camera_utils'
 import * as drawingUtils from '@mediapipe/drawing_utils'
+import Button from '@mui/material/Button'
 import { useRef, useEffect, useState } from 'react'
 import Slouch from './Posture/Slouch'
 
@@ -126,13 +127,20 @@ const BlazePose: React.FC<any> = ({ settings }) => {
           }}
         />
       </div>
-      <button
+      <Button
+        variant="contained"
+        style={{
+          position: 'absolute',
+          marginTop: '15px',
+          marginLeft: '250px'
+        }}
+        sx={{ bgcolor: '#0064C5' }}
         onClick={() => {
           handleClick()
         }}
       >
         Start Session
-      </button>
+      </Button>
       <Slouch
         postureData={postureData}
         startPosition={startPosition}
