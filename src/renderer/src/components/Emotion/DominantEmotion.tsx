@@ -8,6 +8,7 @@ declare global {
 
 const DominantEmotion = () => {
   const [dominantEmotion, setDominantEmotion] = useState("");
+  const [emotionEvent, setEmotionEvent] = useState("")
   
   useEffect(() => {
     bindEvents();
@@ -16,6 +17,11 @@ const DominantEmotion = () => {
   function bindEvents(){
     window.addEventListener("CY_FACE_EMOTION_RESULT", (evt: CustomEvent) => {
       setDominantEmotion((evt).detail.output.dominantEmotion || "") ;
+      if (evt.detail.output.emotion[evt.detail.output.dominantEmotion] > 0.85) {
+        setEmotionEvent(dominantEmotion)
+        // send emotionEvent to database
+      } 
+      
     });
   }
   return (
