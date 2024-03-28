@@ -1,23 +1,35 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import * as pose from '@mediapipe/pose'
 import * as cam from '@mediapipe/camera_utils'
 import * as drawingUtils from '@mediapipe/drawing_utils'
 import Button from '@mui/material/Button'
 import { useRef, useEffect, useState } from 'react'
 import Slouch from './Posture/Slouch'
+import LookAway from './Posture/LookAway'
+import { UserContext } from '@renderer/contexts/User'
+import EyeDistance from './Posture/EyeDistance'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const BlazePose: React.FC<any> = ({ settings }) => {
-  const webcamRef = useRef<HTMLVideoElement>(null)
+const PostureDetection: React.FC<any> = ({ webcamRef }) => {
+  const { modelComplexity } = useContext(UserContext)
+  // const webcamRef = useRef<HTMLVideoElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  // a 'union type' variable. Can either be of type cam.Camera or null. Initialise to a value of null.
+  let camera: cam.Camera | null = null
+
   const [postureData, setPostureData] = useState(null)
   const [startPosition, setStartPosition] = useState(null)
   const [sessionRunning, setSessionRunning] = useState(false)
   const [slouchCount, setSlouchCount] = useState(0)
-  let camera: cam.Camera | null = null
-  const [didLoad, setdidLoad] = useState(false)
+  const [notLookedAwayCount, setNotLookedAwayCount] = useState(0)
+  const [tooCloseCount, setTooCloseCount] = useState(0)
+  const [hasLoaded, setHasLoaded] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function onResults(results: any): void {
+    if (isLoading) {
+      setIsLoading(false)
+    }
     setPostureData(results)
     const canvasElement = canvasRef.current
     if (!canvasElement) return
@@ -52,9 +64,8 @@ const BlazePose: React.FC<any> = ({ settings }) => {
     }
     canvasCtx.restore()
   }
-  //const modelComplexity = Number(settings)
   useEffect(() => {
-    if (!didLoad) {
+    if (!hasLoaded) {
       const mpPose = new pose.Pose({
         locateFile: (file): string => {
           return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`
@@ -74,15 +85,8 @@ const BlazePose: React.FC<any> = ({ settings }) => {
         camera = new cam.Camera(webcamRef.current, {
           onFrame: async (): Promise<void> => {
             const canvasElement = canvasRef.current
-            const aspect = window.innerHeight / window.innerWidth
-            let width, height
-            if (window.innerWidth > window.innerHeight) {
-              height = window.innerHeight
-              width = height / aspect
-            } else {
-              width = window.innerWidth
-              height = width * aspect
-            }
+            const width = 640
+            const height = 480
             if (canvasElement) {
               canvasElement.width = width
               canvasElement.height = height
@@ -92,41 +96,84 @@ const BlazePose: React.FC<any> = ({ settings }) => {
             }
           }
         })
-        camera.start()
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
+        camera
+          .start()
+          .then(() => {
+            setHasLoaded(false)
+          })
+          .catch((error) => {
+            console.error('Camera error:', error)
+          })
         mpPose.onResults(onResults)
-        setdidLoad(true)
       }
     }
     return (): void => {
       camera?.stop()
     }
-  }, [didLoad])
+  }, [hasLoaded])
 
   const handleClick = (): void => {
     if (!sessionRunning) {
       console.log('session started')
       setStartPosition(postureData)
       setSessionRunning(true)
-    } else return
+    } else {
+      setSessionRunning(false)
+      setStartPosition(null)
+      setSlouchCount(0)
+      setNotLookedAwayCount(0)
+      console.log('session stopped')
+      camera?.stop()
+    }
   }
-
   return (
     <>
-      <div style={{ position: 'relative', maxWidth: '640px', maxHeight: '480px' }}>
-        <video ref={webcamRef} style={{ width: '640px', height: '480px' }} />
+      <div style={{ width: '640px', height: '480px', position: 'relative' }}>
+        {isLoading ? (
+          <div
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              zIndex: 30,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: 'rgba(173, 216, 230, 0.5)'
+            }}
+          >
+            <h2 style={{ color: '#fff' }}>Loading...</h2>
+          </div>
+        ) : null}
+        <video
+          ref={webcamRef}
+          muted
+          autoPlay
+          playsInline
+          style={{
+            position: 'absolute',
+            width: '640px',
+            height: '480px',
+            zIndex: 10, // Ensure the video is under the canvas
+            transform: 'scaleX(-1)' // Flip the video horizontally
+          }}
+        />
         <canvas
           ref={canvasRef}
           style={{
             position: 'absolute',
-            left: '0px',
-            top: '0px',
+            left: 0,
+            top: 0,
             zIndex: 50,
             width: '640px',
-            height: '480px'
+            height: '480px',
+            display: isLoading ? 'none' : 'block' // Make sure the canvas is displayed when loading is done
           }}
         />
       </div>
+
+    {isLoading ? null : (
       <Button
         variant="contained"
         style={{
@@ -144,16 +191,30 @@ const BlazePose: React.FC<any> = ({ settings }) => {
           handleClick()
         }}
       >
-        Start Session
+        {sessionRunning ? 'Stop Session' : 'Start Session'}
       </Button>
+      )}
+
       <Slouch
         postureData={postureData}
         startPosition={startPosition}
-        setSlouchCount={setSlouchCount}
         slouchCount={slouchCount}
+        setSlouchCount={setSlouchCount}
+      />
+      <LookAway
+        postureData={postureData}
+        startPosition={startPosition}
+        notLookedAwayCount={notLookedAwayCount}
+        setNotLookedAwayCount={setNotLookedAwayCount}
+      />
+      <EyeDistance
+        postureData={postureData}
+        startPosition={startPosition}
+        tooCloseCount={tooCloseCount}
+        setTooCloseCount={setTooCloseCount}
       />
     </>
   )
 }
 
-export default BlazePose
+export default PostureDetection
