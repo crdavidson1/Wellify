@@ -134,7 +134,12 @@ const BlazePose: React.FC<any> = ({ settings }) => {
           marginTop: '15px',
           marginLeft: '250px'
         }}
-        sx={{ bgcolor: '#0064C5' }}
+        sx={{
+          bgcolor: '#0064C5',
+          '&:hover': {
+            bgcolor: '#89c9fb'
+          }
+        }}
         onClick={() => {
           handleClick()
         }}

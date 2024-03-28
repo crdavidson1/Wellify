@@ -10,7 +10,8 @@ const Home: React.FC<any> = ({ settings }) => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        paddingLeft: '10rem'
+        paddingLeft: '11rem',
+        paddingTop: '2rem'
       }}
     >
       <div>
