@@ -1,8 +1,8 @@
 import React from 'react'
 import PostureDetection from './PostureDetection'
+import EmotionTracking from './EmotionTracking'
 
-
-const Home: React.FC<any> = ({ settings }) => {
+const Home: React.FC<any> = () => {
   return (
     <div
       style={{
@@ -15,7 +15,7 @@ const Home: React.FC<any> = ({ settings }) => {
       }}
     >
       <div>
-        <PostureDetection settings={settings} />
+        <EmotionTracking/>
       </div>
     </div>
   )
