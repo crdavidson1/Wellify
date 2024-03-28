@@ -34,7 +34,6 @@ const Settings: React.FC = () => {
         <label>Camera: </label>
         <select name="Model Performance" id="model-performance">
         {cameras.map((camera) => {
-          console.log(cameras)
             return <option key={camera}>{camera}</option>
         })}
         </select>
