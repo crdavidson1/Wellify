@@ -39,6 +39,7 @@
     "@tensorflow/tfjs-core": "^4.17.0",
     "dotenv": "^16.4.5",
     "electron-updater": "^6.1.7",
+    "express": "^4.19.2",
     "mediapipe-pose-smooth": "^2.0.0",
     "react-router-dom": "^6.22.3",
     "react-webcam": "^7.2.0"
