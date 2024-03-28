@@ -9,9 +9,10 @@ const Settings: React.FC = () => {
     let cameraDevices: string[] = []
     useEffect(() => {
     navigator.mediaDevices.enumerateDevices().then((devices) => {
-        devices.forEach((device) => {
+      cameraDevices = []
+      devices.forEach((device) => {
         if (device.kind === 'videoinput') {
-            cameraDevices.push(device.label)
+          cameraDevices.push(device.label)
         }
         })
         setCameras(cameraDevices)
@@ -33,6 +34,7 @@ const Settings: React.FC = () => {
         <label>Camera: </label>
         <select name="Model Performance" id="model-performance">
         {cameras.map((camera) => {
+          console.log(cameras)
             return <option key={camera}>{camera}</option>
         })}
         </select>
