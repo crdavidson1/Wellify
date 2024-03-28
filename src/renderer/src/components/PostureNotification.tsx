@@ -1,7 +1,15 @@
 import React from 'react'
 
 const PostureNotification: React.FC = () => {
-  return <h1>Test PostureNotification</h1>
+  return (
+    <div
+      style={{
+        paddingLeft: '180px'
+      }}
+    >
+      <h1>Posture Notifications</h1>
+    </div>
+  )
 }
 
 export default PostureNotification

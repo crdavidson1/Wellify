@@ -28,7 +28,11 @@ const Settings: React.FC = () => {
     setModelComplexity(Number(event.target.value))
     }
     return (
-    <div>
+    <div
+      style={{
+        paddingLeft: '180px'
+      }}
+    >
         <br></br>
         <label>Camera: </label>
         <select name="Model Performance" id="model-performance">
