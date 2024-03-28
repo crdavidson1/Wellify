@@ -2,6 +2,7 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import axios from 'axios'
 
 function createWindow(): void {
   // Create the browser window.
@@ -67,7 +68,12 @@ app.whenReady().then(() => {
 
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
-  ipcMain.handle('internal:check', () => {return "OK"})
+  ipcMain.handle('internal:check', async () => {
+    return "ok"
+  })
+  ipcMain.handle('internal:apiCheck', async (e, name) => {
+    return (await axios.get(`https://api.nationalize.io/?name=${name}`)).data
+  })
 
   createWindow()
 
