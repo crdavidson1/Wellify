@@ -1,20 +1,38 @@
-export const testEmotion = [
+module.exports = [
 {
-    emotionId: 1,
-    emotionName: 'happy',
-    time: 1711453505536,
-    sessionId: 1
+    log_id: 1,
+    angry: 0.05,
+    disgust: 0.1,
+    fear: 0.05,
+    happy: 0.1,
+    sad: 0.4,
+    surprise: 0.1,
+    neutral: 0.1,
+    time: 1711453504000,
+    session_id: 1
 },
 {
-    emotionId: 2,
-    emotionName: 'sad',
-    time: 1711453556553,
-    sessionId: 2
+    log_id: 1,
+    angry: 0.05,
+    disgust: 0.1,
+    fear: 0.05,
+    happy: 0.1,
+    sad: 0.4,
+    surprise: 0.1,
+    neutral: 0.1,
+    time: 1711453506000,
+    session_id: 1
 },
 {
-    emotionId: 3,
-    emotionName: 'angry',
-    time: 1711453565953,
-    sessionId: 3
+    log_id: 1,
+    angry: 0.05,
+    disgust: 0.1,
+    fear: 0.05,
+    happy: 0.1,
+    sad: 0.4,
+    surprise: 0.1,
+    neutral: 0.1,
+    time: 1711453508000,
+    session_id: 1
 }
 ];
