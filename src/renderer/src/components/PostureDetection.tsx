@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import * as pose from '@mediapipe/pose'
 import * as cam from '@mediapipe/camera_utils'
 import * as drawingUtils from '@mediapipe/drawing_utils'
+import Button from '@mui/material/Button'
 import { useRef, useEffect, useState } from 'react'
 import Slouch from './Posture/Slouch'
 import LookAway from './Posture/LookAway'
@@ -171,14 +172,27 @@ const PostureDetection: React.FC<any> = ({ webcamRef }) => {
           }}
         />
       </div>
-      {isLoading ? null : (
-        <button
-          onClick={() => {
-            handleClick()
-          }}
-        >
-          {sessionRunning ? 'Stop Session' : 'Start Session'}
-        </button>
+
+    {isLoading ? null : (
+      <Button
+        variant="contained"
+        style={{
+          position: 'absolute',
+          marginTop: '15px',
+          marginLeft: '250px'
+        }}
+        sx={{
+          bgcolor: '#0064C5',
+          '&:hover': {
+            bgcolor: '#89c9fb'
+          }
+        }}
+        onClick={() => {
+          handleClick()
+        }}
+      >
+        {sessionRunning ? 'Stop Session' : 'Start Session'}
+      </Button>
       )}
 
       <Slouch
