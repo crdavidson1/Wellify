@@ -1,4 +1,3 @@
-
 const NotifButton: React.FC = () => {
   async function handleClick(): Promise<void> {
     const res = await window.wellifyAPI.check()
