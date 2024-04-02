@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import * as pose from '@mediapipe/pose'
 import * as cam from '@mediapipe/camera_utils'
 import * as drawingUtils from '@mediapipe/drawing_utils'
+import Button from '@mui/material/Button'
 import { useRef, useEffect, useState } from 'react'
 import Slouch from './Posture/Slouch'
 import LookAway from './Posture/LookAway'
@@ -48,12 +49,12 @@ const PostureDetection: React.FC<any> = ({ webcamRef }) => {
       drawingUtils.drawLandmarks(
         canvasCtx,
         Object.values(pose.POSE_LANDMARKS_LEFT).map((index) => results.poseLandmarks[index]),
-        { visibilityMin: 0.65, color: 'white', fillColor: 'rgb(255,138,0)' }
+        { visibilityMin: 0.65, color: 'white', fillColor: 'rgb(0,100,197)' }
       )
       drawingUtils.drawLandmarks(
         canvasCtx,
         Object.values(pose.POSE_LANDMARKS_RIGHT).map((index) => results.poseLandmarks[index]),
-        { visibilityMin: 0.65, color: 'white', fillColor: 'rgb(0,217,231)' }
+        { visibilityMin: 0.65, color: 'white', fillColor: 'rgb(137,201,251)' }
       )
       drawingUtils.drawLandmarks(
         canvasCtx,
@@ -72,7 +73,7 @@ const PostureDetection: React.FC<any> = ({ webcamRef }) => {
       })
       mpPose.setOptions({
         selfieMode: true,
-        modelComplexity: modelComplexity,
+        modelComplexity: 2,
         smoothLandmarks: true,
         enableSegmentation: false,
         smoothSegmentation: true,
@@ -139,7 +140,7 @@ const PostureDetection: React.FC<any> = ({ webcamRef }) => {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              backgroundColor: 'rgba(173, 216, 230, 0.5)'
+              backgroundColor: 'rgba(137, 201, 251, 0.5)'
             }}
           >
             <h2 style={{ color: '#fff' }}>Loading...</h2>
@@ -171,14 +172,27 @@ const PostureDetection: React.FC<any> = ({ webcamRef }) => {
           }}
         />
       </div>
+
       {isLoading ? null : (
-        <button
+        <Button
+          variant="contained"
+          style={{
+            position: 'absolute',
+            marginTop: '55px',
+            marginLeft: '250px'
+          }}
+          sx={{
+            bgcolor: '#0064C5',
+            '&:hover': {
+              bgcolor: '#89c9fb'
+            }
+          }}
           onClick={() => {
             handleClick()
           }}
         >
           {sessionRunning ? 'Stop Session' : 'Start Session'}
-        </button>
+        </Button>
       )}
 
       <Slouch

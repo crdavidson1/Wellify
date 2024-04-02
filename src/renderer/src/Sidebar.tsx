@@ -8,39 +8,90 @@ import NotificationsIcon from '@mui/icons-material/Notifications'
 
 const Sidebar: React.FC = () => {
   return (
-    <Drawer variant="permanent">
+    <Drawer PaperProps={{ sx: { backgroundColor: '#0064C5' } }} variant="permanent">
       <div>
         <Typography
           variant="h6"
           component="div"
-          sx={{ flexGrow: 1, textAlign: 'center', marginTop: '20px' }}
+          sx={{
+            flexGrow: 1,
+            textAlign: 'center',
+            marginTop: '20px',
+            fontWeight: 'bold',
+            color: 'white',
+            fontSize: '1.7rem'
+          }}
         >
           Wellify
         </Typography>
         <List>
-          <ListItemButton component={Link} to="/">
+          <ListItemButton
+            component={Link}
+            to="/"
+            sx={{
+              '&:hover': {
+                backgroundColor: '#89c9fb'
+              }
+            }}
+          >
             <ListItemIcon>
-              <HomeIcon />
+              <HomeIcon sx={{ color: 'white' }} />
             </ListItemIcon>
-            <ListItemText primary="Home" />
+            <ListItemText
+              primary="Home"
+              primaryTypographyProps={{ sx: { color: 'white', fontSize: '1.25rem' } }}
+            />
           </ListItemButton>
-          <ListItemButton component={Link} to="/statistics">
+          <ListItemButton
+            component={Link}
+            to="/statistics"
+            sx={{
+              '&:hover': {
+                backgroundColor: '#89c9fb'
+              }
+            }}
+          >
             <ListItemIcon>
-              <BarChartIcon />
+              <BarChartIcon sx={{ color: 'white' }} />
             </ListItemIcon>
-            <ListItemText primary="Statistics" />
+            <ListItemText
+              primary="Statistics"
+              primaryTypographyProps={{ sx: { color: 'white', fontSize: '1.25rem' } }}
+            />
           </ListItemButton>
-          <ListItemButton component={Link} to="/settings">
+          <ListItemButton
+            component={Link}
+            to="/settings"
+            sx={{
+              '&:hover': {
+                backgroundColor: '#89c9fb'
+              }
+            }}
+          >
             <ListItemIcon>
-              <SettingsIcon />
+              <SettingsIcon sx={{ color: 'white' }} />
             </ListItemIcon>
-            <ListItemText primary="Settings" />
+            <ListItemText
+              primary="Settings"
+              primaryTypographyProps={{ sx: { color: 'white', fontSize: '1.25rem' } }}
+            />
           </ListItemButton>
-          <ListItemButton component={Link} to="/notifications">
+          <ListItemButton
+            component={Link}
+            to="/notifications"
+            sx={{
+              '&:hover': {
+                backgroundColor: '#89c9fb'
+              }
+            }}
+          >
             <ListItemIcon>
-              <NotificationsIcon />
+              <NotificationsIcon sx={{ color: 'white' }} />
             </ListItemIcon>
-            <ListItemText primary="Notifications" />
+            <ListItemText
+              primary="Notifications"
+              primaryTypographyProps={{ sx: { color: 'white', fontSize: '1.25rem' } }}
+            />
           </ListItemButton>
         </List>
       </div>

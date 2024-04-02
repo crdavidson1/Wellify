@@ -12,28 +12,28 @@ import { UserProvider } from './contexts/User'
 const App: React.FC = () => {
   return (
     <UserProvider>
-    <div
-      style={{ display: 'flex', flexDirection: 'column', minHeight: '20rem', minWidth: '20rem' }}
-    >
-      <Sidebar />
-      <div>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/statistics" element={<Statistics />} />
-          <Route
-            path="/notifications"
-            element={
-              <>
-                <PostureNotification />
-                <EmotionNotification />
-                <NotifButton />
-              </>
-            }
-          />
-        </Routes>
+      <div
+        style={{ display: 'flex', flexDirection: 'column', minHeight: '20rem', minWidth: '20rem' }}
+      >
+        <Sidebar />
+        <div>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/statistics" element={<Statistics />} />
+            <Route
+              path="/notifications"
+              element={
+                <>
+                  <PostureNotification />
+                  <EmotionNotification />
+                  <NotifButton />
+                </>
+              }
+            />
+          </Routes>
+        </div>
       </div>
-    </div>
     </UserProvider>
   )
 }

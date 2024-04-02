@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -7,51 +7,51 @@ import {
   ArcElement,
   Title,
   Tooltip,
-  Legend,
-} from 'chart.js';
-import { Bar } from 'react-chartjs-2';
-import {faker} from '@faker-js/faker';
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  ArcElement,
-  Title,
-  Tooltip,
   Legend
-);
+} from 'chart.js'
+import { Bar } from 'react-chartjs-2'
+import { faker } from '@faker-js/faker'
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Title, Tooltip, Legend)
 
 const SlouchChart: React.FC = () => {
-    const options = {
+  const options = {
     responsive: true,
     plugins: {
-        legend: {
-        position: 'top' as const,
-        },
-        title: {
+      legend: {
+        position: 'top' as const
+      },
+      title: {
         display: true,
-        text: 'Slouches This Week',
-        },
-    },
-    };
+        text: 'Slouches This Week'
+      }
+    }
+  }
 
-    const labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  const labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
-    const data = {
+  const data = {
     labels,
     datasets: [
-        {
+      {
         label: 'Number of slouches',
         data: labels.map(() => faker.datatype.number({ min: 0, max: 20 })),
-        backgroundColor: '#222222',
-        }
-    ],
-    };
+        backgroundColor: '#222222'
+      }
+    ]
+  }
 
-    return (
-    <div style={{height:'400px'}}>
-        <Bar options={options} data={data}/>
+  return (
+    <div
+      style={{
+        width: 'calc(100vw - 20rem)',
+        height: '100%',
+        display: 'flex',
+        paddingLeft: '15rem',
+        paddingTop: '2rem'
+      }}
+    >
+      <Bar options={options} data={data} />
     </div>
   )
 }

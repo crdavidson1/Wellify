@@ -18,12 +18,12 @@ function createWindow(): void {
   })
 
   const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 670,
-    minWidth: 900,
-    minHeight: 670,
-    maxWidth: 900,
-    maxHeight: 670,
+    width: 1200,
+    height: 700,
+    minWidth: 1200,
+    minHeight: 700,
+    maxWidth: 1200,
+    maxHeight: 700,
     show: false,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
