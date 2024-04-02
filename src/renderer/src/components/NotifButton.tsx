@@ -1,7 +1,8 @@
 const NotifButton: React.FC = () => {
   async function handleClick(): Promise<void> {
-    const res = await window.wellifyAPI.loki()
-    console.log(res);
+
+    const res = await window.wellifyAPI.check()
+    console.log(res)
 
     const res2 = await window.wellifyAPI.checkAPI('alex diamond')
     console.log(res2);
@@ -15,12 +16,11 @@ const NotifButton: React.FC = () => {
     })
   }
   return (
-    <div style={{paddingLeft: '180px'}}>
-    <button id="trigger" onClick={handleClick}>
-      Trigger Notification
-    </button>
+    <div style={{ paddingLeft: '180px' }}>
+      <button id="trigger" onClick={handleClick}>
+        Trigger Notification
+      </button>
     </div>
-
   )
 }
 

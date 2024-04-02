@@ -13,7 +13,8 @@ const Home: React.FC<any> = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        paddingLeft: '10rem'
+        paddingLeft: '11rem',
+        paddingTop: '2rem'
       }}
     >
       <div>
@@ -30,8 +31,8 @@ const Home: React.FC<any> = () => {
             transform: 'scaleX(-1)' // Flip the video horizontally
           }}
         />
-        <PostureDetection webcamRef={webcamRef}/>
-        <EmotionTracking webcamRef={webcamRef}/>
+        <PostureDetection webcamRef={webcamRef} />
+        <EmotionTracking webcamRef={webcamRef} />
       </div>
     </div>
   )
