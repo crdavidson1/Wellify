@@ -5,10 +5,10 @@ import { Select, MenuItem, Button, Typography } from '@mui/material'
 
 const Settings: React.FC = () => {
   const { modelComplexity, setModelComplexity } = useContext(UserContext)
+  const { camera, setCamera } = useContext(UserContext)
+  const { postureStrictness, setPostureStrictness } = useContext(UserContext)
   const [cameras, setCameras] = useState<string[]>([])
   const [cameraRefresh, setCameraRefresh] = useState<boolean>()
-  const [camera, setCamera] = useState<string[]>([])
-  const [postureStrictness, setPostureStrictness] = useState<string[]>([])
 
   let cameraDevices: string[] = []
   useEffect(() => {
@@ -20,6 +20,9 @@ const Settings: React.FC = () => {
         }
       })
       setCameras(cameraDevices)
+      if (!camera) {
+        setCamera(cameraDevices[0])
+      }
       setCameraRefresh(false)
     })
   }, [cameraRefresh])
@@ -40,40 +43,6 @@ const Settings: React.FC = () => {
   function handlePostureChange(event): void {
     setPostureStrictness(event.target.value)
   }
-  // return (
-  //   <div style={{ paddingLeft: '180px' }}>
-  //     <br></br>
-  //     <label>Camera: </label>
-  //     <select name="Model Performance" id="model-performance">
-  //       {cameras.map((camera) => {
-  //         return <option key={camera}>{camera}</option>
-  //       })}
-  //     </select>
-  //     <button onClick={reloadCamera}>Refresh</button>
-  //     <br></br>
-  //     <br></br>
-  //     <label>Model Performance: </label>
-  //     <select value={modelComplexity} onChange={handleChange} id="model-performance">
-  //       <option key="0" value="0">
-  //         Lite
-  //       </option>
-  //       <option key="1" value="1">
-  //         Full
-  //       </option>
-  //       <option key="2" value="2">
-  //         Heavy
-  //       </option>
-  //     </select>
-  //     <br></br>
-  //     <br></br>
-  //     <label>Posture Strictness: </label>
-  //     <select name="Posture Strictness" id="posture-strictness">
-  //       <option>Low</option>
-  //       <option>Medium</option>
-  //       <option>High</option>
-  //     </select>
-  //   </div>
-  // )
 
   return (
     <div>
@@ -94,7 +63,6 @@ const Settings: React.FC = () => {
       <div style={{ paddingLeft: '15rem' }}>
         <br />
         <label>Camera: </label>
-        {/* Replace select with Select */}
         <Select
           value={camera}
           onChange={handleCameraChange}
@@ -102,14 +70,12 @@ const Settings: React.FC = () => {
           label="Camera" // Add label for accessibility
           id="camera" // Add id for labeling
         >
-          {/* Replace option with MenuItem */}
           {cameras.map((camera) => (
             <MenuItem key={camera} value={camera}>
               {camera}
             </MenuItem>
           ))}
         </Select>
-        {/* Replace button with Button */}
         <Button onClick={reloadCamera}>Refresh</Button>
         <br />
         <br />
