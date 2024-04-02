@@ -74,11 +74,11 @@ const ApplicationChart: React.FC = () => {
   return (
     <div
       style={{
-        width: 'calc(100vw - 20rem)',
-        height: '100%',
         display: 'flex',
-        paddingLeft: '15rem',
-        paddingTop: '2rem'
+        justifyContent: 'center',
+        paddingLeft: '5%',
+        paddingTop: '5%',
+        width: '90%'
       }}
     >
       <Bar options={options3} data={data3} />

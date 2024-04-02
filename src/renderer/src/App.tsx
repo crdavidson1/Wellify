@@ -8,15 +8,19 @@ import EmotionNotification from './components/EmotionNotification'
 import NotifButton from './components/NotifButton'
 import Sidebar from './Sidebar'
 import { UserProvider } from './contexts/User'
-
 const App: React.FC = () => {
   return (
     <UserProvider>
       <div
-        style={{ display: 'flex', flexDirection: 'column', minHeight: '20rem', minWidth: '20rem' }}
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '200px 1fr',
+          maxHeight: '100vh',
+          maxWidth: '100vw'
+        }}
       >
         <Sidebar />
-        <div>
+        <div style={{ overflowY: 'auto' }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/settings" element={<Settings />} />

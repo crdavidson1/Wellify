@@ -28,13 +28,13 @@ const Statistics: React.FC = () => {
   }
 
   return (
-    <div>
+    <div style={{ maxWidth: '100%' }}>
       <div
         style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          paddingLeft: '12rem'
+          justifyContent: 'center'
         }}
       >
         <br></br>
