@@ -57,11 +57,9 @@ const EmotionChart: React.FC = () => {
   return (
     <div
       style={{
-        width: 'calc(100vw - 40rem)',
-        height: '30%',
-        display: 'flex',
-        paddingLeft: '25rem',
-        paddingTop: '2rem'
+        paddingLeft: '27rem',
+        paddingTop: '2rem',
+        width: '30rem'
       }}
     >
       <Pie options={options2} data={data2} />
