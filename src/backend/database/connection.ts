@@ -1,38 +1,28 @@
-const mysql = require('mysql2/promise.js')
-const config = {}
-
+const mysql = require('mysql2/promise')
+import {Connector, AuthTypes, IpAddressTypes} from '@google-cloud/cloud-sql-connector'
 const databaseName: string = process.env.NODE_ENV === 'test' ? 'wellify_test' : 'wellify_db'
+process.env.GOOGLE_APPLICATION_CREDENTIALS = '/home/robbob/Downloads/sound-abbey-419112-042182a9fe88.json'
 
-require('dotenv').config({ path: `${__dirname}/../../.env.${databaseName}` })
+export default async function connect() {
+  const connector = new Connector()
+  const clientOptions = await connector.getOptions({
+    instanceConnectionName: 'sound-abbey-419112:europe-west2:wellify',
+    ipType: IpAddressTypes.PUBLIC,
+    authType: AuthTypes.PASSWORD
+  })
+  const pool = await mysql.createPool({
+    ...clientOptions,
+    user: 'test',
+    password: 'test',
+    database: 'wellify_test'
+  })
+  const db = await pool.getConnection()
 
-const pool = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: databaseName,
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0
-})
-
-export default pool
-
-// const fn = async (): Promise<void> => {
-//   const connection = await mysql.createConnection ({
-//   host: process.env.DB_HOST || 'localhost',
-//   user: process.env.DB_USER || 'robbob',
-//   password: process.env.DB_PASSWORD || 'robbob',
-//   database: databaseName,
-//   waitForConnections: true,
-//   connectionLimit: 10,
-//   queueLimit: 0
-//   })
-
-//   connection.query(`
-//     select * from example;
-//     `)
-//   .then((res) => {
-//     console.log(res);
-
-//   })
-// }
+  return {
+    db,
+    async close() {
+      await pool.end()
+      db.close()
+    }
+  }
+}
