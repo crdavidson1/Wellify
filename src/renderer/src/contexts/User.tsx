@@ -17,10 +17,12 @@ export const UserContext = createContext<{
 })
 
 export const UserProvider: React.FC<any> = ({ children }) => {
-  const saved = JSON.parse(localStorage.getItem('currentUser') || '1')
-  const [modelComplexity, setModelComplexity] = useState(saved)
+  const savedComplexity = JSON.parse(localStorage.getItem('modelComplexity') || '1')
+  const [modelComplexity, setModelComplexity] = useState(savedComplexity)
+  // const savedCamera = JSON.parse(localStorage.getItem('camera') || 'camera')
   const [camera, setCamera] = useState('')
-  const [postureStrictness, setPostureStrictness] = useState('Medium')
+  const savedStrictness = JSON.parse(localStorage.getItem('postureStrictness') || '1')
+  const [postureStrictness, setPostureStrictness] = useState(savedStrictness)
   return (
     <UserContext.Provider value={{ modelComplexity, setModelComplexity, camera, setCamera, postureStrictness, setPostureStrictness }}>
       {children}

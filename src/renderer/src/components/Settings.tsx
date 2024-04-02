@@ -34,14 +34,17 @@ const Settings: React.FC = () => {
   }
   function handleChange(event): void {
     setModelComplexity(Number(event.target.value))
+    localStorage.setItem('modelComplexity', JSON.stringify(modelComplexity))
   }
 
   function handleCameraChange(event): void {
     setCamera(event.target.value)
+    localStorage.setItem('camera', JSON.stringify(camera))
   }
 
   function handlePostureChange(event): void {
     setPostureStrictness(event.target.value)
+    localStorage.setItem('postureStrictness', JSON.stringify(postureStrictness))
   }
 
   return (
@@ -109,9 +112,9 @@ const Settings: React.FC = () => {
           id="posture-strictness" // Add id for labeling
         >
           {/* Replace option with MenuItem */}
-          <MenuItem value="Low">Low</MenuItem>
-          <MenuItem value="Medium">Medium</MenuItem>
-          <MenuItem value="High">High</MenuItem>
+          <MenuItem value="1.5">Low</MenuItem>
+          <MenuItem value="1">Medium</MenuItem>
+          <MenuItem value="0.5">High</MenuItem>
         </Select>
       </div>
     </div>
