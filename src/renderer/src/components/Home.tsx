@@ -31,8 +31,8 @@ const Home: React.FC<any> = () => {
             transform: 'scaleX(-1)' // Flip the video horizontally
           }}
         />
-        <PostureDetection webcamRef={webcamRef}/>
-        <EmotionTracking webcamRef={webcamRef}/>
+        <PostureDetection webcamRef={webcamRef} />
+        <EmotionTracking webcamRef={webcamRef} />
       </div>
     </div>
   )

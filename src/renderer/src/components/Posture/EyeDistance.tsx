@@ -12,7 +12,10 @@ const EyeDistance = ({
   const { postureStrictness } = useContext(UserContext)
   if (postureData && startPosition) {
     useEffect(() => {
-      if (postureData.poseLandmarks[0].z < startPosition.poseLandmarks[0].z * (1 + (Number(postureStrictness)/10))) {
+      if (
+        postureData.poseLandmarks[0].z <
+        startPosition.poseLandmarks[0].z * (1 + Number(postureStrictness) / 10)
+      ) {
         setTooCloseCount((currCount) => {
           return currCount + 2
         })

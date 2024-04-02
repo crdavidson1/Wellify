@@ -1,7 +1,7 @@
 const NotifButton: React.FC = () => {
   async function handleClick(): Promise<void> {
     const res = await window.wellifyAPI.check()
-    console.log(res);
+    console.log(res)
 
     Notification.requestPermission().then(() => {
       const NOTIFICATION_TITLE = 'Title'
@@ -11,12 +11,11 @@ const NotifButton: React.FC = () => {
     })
   }
   return (
-    <div style={{paddingLeft: '180px'}}>
-    <button id="trigger" onClick={handleClick}>
-      Trigger Notification
-    </button>
+    <div style={{ paddingLeft: '180px' }}>
+      <button id="trigger" onClick={handleClick}>
+        Trigger Notification
+      </button>
     </div>
-
   )
 }
 
