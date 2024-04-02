@@ -3,8 +3,15 @@ import { useRef } from 'react'
 import PostureDetection from './PostureDetection'
 import EmotionTracking from './EmotionTracking'
 
+
 const Home: React.FC<any> = () => {
   const webcamRef = useRef<HTMLVideoElement>(null)
+  async function getActiveWindow() {
+    const res = await window.wellifyAPI.getWindow()
+    console.log(res)
+    return res
+  }
+  getActiveWindow()
   return (
     <div
       style={{

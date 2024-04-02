@@ -30,7 +30,6 @@ const EyeDistance = ({
       }
     }, [postureData])
   }
-  console.log(tooCloseCount)
   if (tooCloseCount > 100) {
     setTooCloseCount(0)
     Notifier('Eye Health Alert', 'Please move face further away from screen')
