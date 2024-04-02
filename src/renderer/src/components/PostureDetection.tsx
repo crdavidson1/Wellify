@@ -8,6 +8,7 @@ import Slouch from './Posture/Slouch'
 import LookAway from './Posture/LookAway'
 import { UserContext } from '@renderer/contexts/User'
 import EyeDistance from './Posture/EyeDistance'
+import { Box, CircularProgress, LinearProgress, Typography } from '@mui/material'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const PostureDetection: React.FC<any> = ({ webcamRef }) => {
@@ -25,6 +26,8 @@ const PostureDetection: React.FC<any> = ({ webcamRef }) => {
   const [tooCloseCount, setTooCloseCount] = useState(0)
   const [hasLoaded, setHasLoaded] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [sessionStarting, setSessionStarting] = useState(false)
+  const [progress, setProgress] = React.useState(0)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function onResults(results: any): void {
     if (isLoading) {
@@ -115,9 +118,13 @@ const PostureDetection: React.FC<any> = ({ webcamRef }) => {
 
   const handleClick = (): void => {
     if (!sessionRunning) {
-      console.log('session started')
-      setStartPosition(postureData)
+      setSessionStarting(true)
       setSessionRunning(true)
+      setTimeout(() => {
+        console.log('session started')
+        setStartPosition(postureData)
+        setSessionStarting(false)
+      }, 3000)
     } else {
       setSessionRunning(false)
       setStartPosition(null)
@@ -140,10 +147,40 @@ const PostureDetection: React.FC<any> = ({ webcamRef }) => {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              backgroundColor: 'rgba(137, 201, 251, 0.5)'
+              backgroundColor: 'rgba(0, 100, 197, 0.7)'
             }}
           >
-            <h2 style={{ color: '#fff' }}>Loading...</h2>
+            <CircularProgress size={80} sx={{ color: '#89c9fb' }} />
+          </div>
+        ) : null}
+        {sessionStarting ? (
+          <div
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              zIndex: 50,
+              backgroundColor: 'rgba(0, 100, 197, 0.7)',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{
+                color: 'white',
+                fontSize: '1.7rem',
+                fontWeight: 'bolder',
+                textAlign: 'center',
+                marginBottom: 4
+              }}
+            >
+              Please make sure to sit up straight...
+            </Typography>
+            <CircularProgress size={80} sx={{ color: '#89c9fb' }} />
           </div>
         ) : null}
         <video
@@ -155,8 +192,8 @@ const PostureDetection: React.FC<any> = ({ webcamRef }) => {
             position: 'absolute',
             width: '640px',
             height: '480px',
-            zIndex: 10, // Ensure the video is under the canvas
-            transform: 'scaleX(-1)' // Flip the video horizontally
+            zIndex: 10,
+            transform: 'scaleX(-1)'
           }}
         />
         <canvas
@@ -165,10 +202,10 @@ const PostureDetection: React.FC<any> = ({ webcamRef }) => {
             position: 'absolute',
             left: 0,
             top: 0,
-            zIndex: 50,
+            zIndex: 20,
             width: '640px',
             height: '480px',
-            display: isLoading ? 'none' : 'block' // Make sure the canvas is displayed when loading is done
+            display: isLoading ? 'none' : 'block'
           }}
         />
       </div>

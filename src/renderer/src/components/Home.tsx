@@ -15,13 +15,11 @@ const Home: React.FC<any> = () => {
   return (
     <div
       style={{
-        width: 'calc(100vw - 10rem)',
-        height: '100%',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center',
-        paddingLeft: '11rem',
-        paddingTop: '2rem'
+        paddingLeft: '5%',
+        paddingTop: '5%',
+        width: '90%'
       }}
     >
       <div>

@@ -63,7 +63,14 @@ const Settings: React.FC = () => {
       >
         Settings
       </Typography>
-      <div style={{ paddingLeft: '15rem' }}>
+      <div
+        style={{
+          justifyContent: 'center',
+          paddingLeft: '5%',
+          paddingTop: '5%',
+          width: '90%'
+        }}
+      >
         <br />
         <label>Camera: </label>
         <Select
