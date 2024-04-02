@@ -34,17 +34,17 @@ const Settings: React.FC = () => {
   }
   function handleChange(event): void {
     setModelComplexity(Number(event.target.value))
-    localStorage.setItem('modelComplexity', JSON.stringify(modelComplexity))
+    localStorage.setItem('modelComplexity', JSON.stringify(event.target.value))
   }
 
   function handleCameraChange(event): void {
     setCamera(event.target.value)
-    localStorage.setItem('camera', JSON.stringify(camera))
+    localStorage.setItem('camera', JSON.stringify(event.target.value))
   }
 
   function handlePostureChange(event): void {
     setPostureStrictness(event.target.value)
-    localStorage.setItem('postureStrictness', JSON.stringify(postureStrictness))
+    localStorage.setItem('postureStrictness', JSON.stringify(event.target.value))
   }
 
   return (
