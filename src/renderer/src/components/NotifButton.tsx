@@ -1,7 +1,12 @@
 const NotifButton: React.FC = () => {
   async function handleClick(): Promise<void> {
+
     const res = await window.wellifyAPI.check()
     console.log(res)
+
+    const res2 = await window.wellifyAPI.checkAPI('alex diamond')
+    console.log(res2);
+    
 
     Notification.requestPermission().then(() => {
       const NOTIFICATION_TITLE = 'Title'
