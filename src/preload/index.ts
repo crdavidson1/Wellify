@@ -13,7 +13,8 @@ if (process.contextIsolated) {
     contextBridge.exposeInMainWorld('api', api)
 
     contextBridge.exposeInMainWorld('wellifyAPI', {
-      check: () => ipcRenderer.invoke('internal:check')
+      check: () => ipcRenderer.invoke('internal:check'),
+      getWindow: () => ipcRenderer.invoke('get-window')
     })
   } catch (error) {
     console.error(error)
