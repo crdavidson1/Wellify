@@ -1,7 +1,6 @@
 // import { Pool } from 'mysql2/promise'
 import pool from '../connection'
 
-
 const seed = async (data: any): Promise<void> => {
   const conn = await pool.getConnection()
 
@@ -53,7 +52,7 @@ const seed = async (data: any): Promise<void> => {
   // }
 
   const tableTitles: Array<String> = ['activity', 'emotions', 'events', 'look', 'move_failures', 'pauses', 'sessions', 'slouches', 'users'];
-  
+
   for (const title of tableTitles) {
     await conn.query(`DROP TABLE IF EXISTS ${title}`)
   }
@@ -62,7 +61,7 @@ const seed = async (data: any): Promise<void> => {
     activity_id SERIAL PRIMARY KEY,
     app_name VARCHAR(15)
   );`)
-  
+
   await conn.query(`CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     username VARCHAR (50),
@@ -101,27 +100,25 @@ const seed = async (data: any): Promise<void> => {
     session_id INT
   )`)
 
-  async function insert (query: String, params: Array<String>): Promise<void> {
+  async function insert(query: String, params: Array<String>): Promise<void> {
     await conn.execute(query, params)
   }
 
-  data.userData.forEach(({username, password, name, email}) => {
+  data.userData.forEach(({ username, password, name, email }) => {
     insert(`INSERT INTO users (username, password, name, email) VALUES (?, ?, ?, ?);`, [username, password, name, email])
   })
-  
-  data.activityData.forEach(({appName}) => {
+
+  data.activityData.forEach(({ appName }) => {
     insert(`INSERT INTO activity (app_name) VALUES (?)`, [appName])
   })
 
-  data.emotionData.forEach(({log_id, angry, disgust, fear, happy, sad, surprise, neutral, time, session_id}) => {
+  data.emotionData.forEach(({ log_id, angry, disgust, fear, happy, sad, surprise, neutral, time, session_id }) => {
     insert(`INSERT INTO emotions (log_id, angry, disgust, fear, happy, sad, surprise, neutral, time, session_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, [log_id, angry, disgust, fear, happy, sad, surprise, neutral, new Date(time), session_id])
   })
 
   conn.release()
-  
-  pool.releaseConnection(conn)
 
-  
+  pool.releaseConnection(conn)
 
 }
 export default seed

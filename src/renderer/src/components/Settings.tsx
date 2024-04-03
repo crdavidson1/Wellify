@@ -77,8 +77,8 @@ const Settings: React.FC = () => {
           value={camera}
           onChange={handleCameraChange}
           style={{ minWidth: '150px' }}
-          label="Camera" // Add label for accessibility
-          id="camera" // Add id for labeling
+          label="Camera"
+          id="camera"
         >
           {cameras.map((camera) => (
             <MenuItem key={camera} value={camera}>
@@ -94,10 +94,9 @@ const Settings: React.FC = () => {
           value={modelComplexity}
           onChange={handleChange}
           style={{ minWidth: '150px' }}
-          label="Model Performance" // Add label for accessibility
-          id="model-performance" // Add id for labeling
+          label="Model Performance"
+          id="model-performance"
         >
-          {/* Replace option with MenuItem */}
           <MenuItem key="0" value={0}>
             Lite
           </MenuItem>
@@ -115,10 +114,9 @@ const Settings: React.FC = () => {
           value={postureStrictness}
           onChange={handlePostureChange}
           style={{ minWidth: '150px' }}
-          label="Posture Strictness" // Add label for accessibility
-          id="posture-strictness" // Add id for labeling
+          label="Posture Strictness"
+          id="posture-strictness"
         >
-          {/* Replace option with MenuItem */}
           <MenuItem value="1.5">Low</MenuItem>
           <MenuItem value="1">Medium</MenuItem>
           <MenuItem value="0.5">High</MenuItem>
