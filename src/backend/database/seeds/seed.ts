@@ -1,5 +1,7 @@
 // import { Pool } from 'mysql2/promise'
+
 import connect from '../connection'
+
 
 const seed = async (data: any): Promise<void> => {
   return connect().then(async ({ db, close }) => {

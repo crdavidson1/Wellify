@@ -6,17 +6,15 @@ import Button from '@mui/material/Button'
 import { useRef, useEffect, useState } from 'react'
 import Slouch from './Posture/Slouch'
 import LookAway from './Posture/LookAway'
-import { UserContext } from '@renderer/contexts/User'
 import EyeDistance from './Posture/EyeDistance'
-import { Box, CircularProgress, LinearProgress, Typography } from '@mui/material'
+import { CircularProgress, Typography } from '@mui/material'
+import { UserContext } from '@renderer/contexts/User'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const PostureDetection: React.FC<any> = ({ webcamRef }) => {
-  const { modelComplexity } = useContext(UserContext)
-  // const webcamRef = useRef<HTMLVideoElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  // a 'union type' variable. Can either be of type cam.Camera or null. Initialise to a value of null.
   let camera: cam.Camera | null = null
+  const { modelComplexity } = useContext(UserContext)
 
   const [postureData, setPostureData] = useState(null)
   const [startPosition, setStartPosition] = useState(null)
@@ -27,7 +25,6 @@ const PostureDetection: React.FC<any> = ({ webcamRef }) => {
   const [hasLoaded, setHasLoaded] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [sessionStarting, setSessionStarting] = useState(false)
-  const [progress, setProgress] = React.useState(0)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function onResults(results: any): void {
     if (isLoading) {
@@ -37,7 +34,7 @@ const PostureDetection: React.FC<any> = ({ webcamRef }) => {
     const canvasElement = canvasRef.current
     if (!canvasElement) return
 
-    const canvasCtx = canvasElement.getContext('2d')
+    const canvasCtx = canvasElement.getContext('2d', { willReadFrequently: true })
     if (!canvasCtx) return
 
     canvasCtx.save()
@@ -76,7 +73,7 @@ const PostureDetection: React.FC<any> = ({ webcamRef }) => {
       })
       mpPose.setOptions({
         selfieMode: true,
-        modelComplexity: 2,
+        modelComplexity: modelComplexity,
         smoothLandmarks: true,
         enableSegmentation: false,
         smoothSegmentation: true,

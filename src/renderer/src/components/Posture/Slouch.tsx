@@ -3,7 +3,7 @@ import Notifier from '../../utils/Notifier'
 import { UserContext } from '@renderer/contexts/User'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Slouch = ({ postureData, startPosition, slouchCount, setSlouchCount }: any): void => {
+const Slouch = ({ postureData, startPosition, slouchCount, setSlouchCount }: any): null => {
   const { postureStrictness } = useContext(UserContext)
   if (postureData && startPosition) {
     const height: number =
@@ -40,7 +40,7 @@ const Slouch = ({ postureData, startPosition, slouchCount, setSlouchCount }: any
     setSlouchCount(0)
     Notifier('Posture Alert', 'Please sit up straight, you have been slouching')
   }
-  return
+  return null
 }
 
 export default Slouch

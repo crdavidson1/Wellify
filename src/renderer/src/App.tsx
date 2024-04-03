@@ -25,16 +25,6 @@ const App: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/statistics" element={<Statistics />} />
-            <Route
-              path="/notifications"
-              element={
-                <>
-                  <PostureNotification />
-                  <EmotionNotification />
-                  <NotifButton />
-                </>
-              }
-            />
           </Routes>
         </div>
       </div>

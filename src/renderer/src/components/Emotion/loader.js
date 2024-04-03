@@ -20,17 +20,16 @@ async function initAiSdk() {
   source = new Source()
 
   aiSdkInstance = await globalThis.CY.loader()
-    // TODO INSERT YOUR LICENSE KEY HERE
-    .licenseKey('sk00b96a7fb46ff94ba8087f026af38e581afe668f7f0e') // <--- ##############
+    .licenseKey('sk00b96a7fb46ff94ba8087f026af38e581afe668f7f0e')
     .source(source)
     .addModule(globalThis.CY.modules().FACE_DETECTOR.name)
     .addModule(globalThis.CY.modules().FACE_EMOTION.name, {
-      enableBalancer: false, // example of custom setting
+      enableBalancer: false,
       smoothness: 0.5
     })
     .addModule(globalThis.CY.modules().FACE_GENDER.name, {})
     .addModule(globalThis.CY.modules().FACE_AGE.name, {
-      windowSizeMs: 4000, // example of custom setting
+      windowSizeMs: 4000,
       maxVarianceCutoff: Math.pow(7, 2),
       numericalStability: 1
     })
@@ -38,7 +37,7 @@ async function initAiSdk() {
     .addModule(globalThis.CY.modules().FACE_POSITIVITY.name, {})
     .addModule(globalThis.CY.modules().FACE_POSE.name, {})
     .addModule(globalThis.CY.modules().FACE_AROUSAL_VALENCE.name, {
-      smoothness: 0.9 // example of custom setting
+      smoothness: 0.9
     })
     .addModule(globalThis.CY.modules().FACE_ATTENTION.name, {})
     .addModule(globalThis.CY.modules().DATA_AGGREGATOR.name, {})
