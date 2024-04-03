@@ -76,23 +76,6 @@ const Sidebar: React.FC = () => {
               primaryTypographyProps={{ sx: { color: 'white', fontSize: '1.25rem' } }}
             />
           </ListItemButton>
-          <ListItemButton
-            component={Link}
-            to="/notifications"
-            sx={{
-              '&:hover': {
-                backgroundColor: '#89c9fb'
-              }
-            }}
-          >
-            <ListItemIcon>
-              <NotificationsIcon sx={{ color: 'white' }} />
-            </ListItemIcon>
-            <ListItemText
-              primary="Notifications"
-              primaryTypographyProps={{ sx: { color: 'white', fontSize: '1.25rem' } }}
-            />
-          </ListItemButton>
         </List>
       </div>
     </Drawer>
