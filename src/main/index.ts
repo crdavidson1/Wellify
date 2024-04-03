@@ -2,8 +2,9 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
-import getActiveWindow from './script.js'
+import {getActiveWindow} from './script.js'
 import axios from 'axios'
+import { getEmotions } from './script'
 
 function createWindow(): void {
   // Create the browser window.
@@ -78,7 +79,10 @@ app.whenReady().then(() => {
   })
   ipcMain.handle('get-window', () => {
     return getActiveWindow()
-  })  
+  })
+  ipcMain.handle('get-emotions', () => {
+    return getEmotions()
+  })
     
   createWindow()
 
