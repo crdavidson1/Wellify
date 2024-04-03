@@ -1,14 +1,14 @@
-import { createContext, useState } from 'react'
+import React, { createContext, useState } from 'react'
 
 export const UserContext = createContext<{
   modelComplexity: 0 | 1 | 2 | undefined
-  setModelComplexity: (newValue) => void
+  setModelComplexity: (newValue: string) => void
   camera: string
-  setCamera: (newValue) => void
+  setCamera: (newValue: string) => void
   postureStrictness: string
-  setPostureStrictness: (newValue) => void
+  setPostureStrictness: (newValue: string) => void
 }>({
-  modelComplexity: 1,
+  modelComplexity: 2,
   setModelComplexity: () => undefined,
   camera: '',
   setCamera: () => undefined,
@@ -17,15 +17,36 @@ export const UserContext = createContext<{
 })
 
 export const UserProvider: React.FC<any> = ({ children }) => {
-  const savedComplexity = JSON.parse(localStorage.getItem('modelComplexity') || '1')
-  const [modelComplexity, setModelComplexity] = useState(savedComplexity)
-  // const savedCamera = JSON.parse(localStorage.getItem('camera') || 'camera')
-  const [camera, setCamera] = useState('')
-  const savedStrictness = JSON.parse(localStorage.getItem('postureStrictness') || '1')
-  console.log(JSON.parse(localStorage.getItem('postureStrictness') || ''))
-  const [postureStrictness, setPostureStrictness] = useState(savedStrictness)
+  const savedSettingsChecker = (key: string, defaultValue: any) => {
+    const item = localStorage.getItem(key)
+    if (item) {
+      try {
+        return JSON.parse(item)
+      } catch {
+        return defaultValue
+      }
+    }
+    return defaultValue
+  }
+
+  const [modelComplexity, setModelComplexity] = useState(
+    savedSettingsChecker('modelComplexity', '2')
+  )
+  const [camera, setCamera] = useState(savedSettingsChecker('camera', ''))
+  const [postureStrictness, setPostureStrictness] = useState(
+    savedSettingsChecker('postureStrictness', '1')
+  )
   return (
-    <UserContext.Provider value={{ modelComplexity, setModelComplexity, camera, setCamera, postureStrictness, setPostureStrictness }}>
+    <UserContext.Provider
+      value={{
+        modelComplexity,
+        setModelComplexity,
+        camera,
+        setCamera,
+        postureStrictness,
+        setPostureStrictness
+      }}
+    >
       {children}
     </UserContext.Provider>
   )

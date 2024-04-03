@@ -5,6 +5,7 @@ import HomeIcon from '@mui/icons-material/Home'
 import BarChartIcon from '@mui/icons-material/BarChart'
 import SettingsIcon from '@mui/icons-material/Settings'
 import NotificationsIcon from '@mui/icons-material/Notifications'
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 
 const Sidebar: React.FC = () => {
   return (
@@ -90,6 +91,23 @@ const Sidebar: React.FC = () => {
             </ListItemIcon>
             <ListItemText
               primary="Notifications"
+              primaryTypographyProps={{ sx: { color: 'white', fontSize: '1.25rem' } }}
+            />
+          </ListItemButton>
+          <ListItemButton
+            component={Link}
+            to="/about"
+            sx={{
+              '&:hover': {
+                backgroundColor: '#89c9fb'
+              }
+            }}
+          >
+            <ListItemIcon>
+              <InfoOutlinedIcon sx={{ color: 'white' }} />
+            </ListItemIcon>
+            <ListItemText
+              primary="About"
               primaryTypographyProps={{ sx: { color: 'white', fontSize: '1.25rem' } }}
             />
           </ListItemButton>

@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import Statistics from './components/Statistics'
 import Settings from './components/Settings'
 import Home from './components/Home'
+import About from './components/About'
 import PostureNotification from './components/PostureNotification'
 import EmotionNotification from './components/EmotionNotification'
 import NotifButton from './components/NotifButton'
@@ -35,6 +36,7 @@ const App: React.FC = () => {
                 </>
               }
             />
+            <Route path="/about" element={<About />} />
           </Routes>
         </div>
       </div>
