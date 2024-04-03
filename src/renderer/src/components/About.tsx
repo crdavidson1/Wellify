@@ -49,12 +49,14 @@ export default function About() {
               <div>
                 <a
                   href="https://www.linkedin.com/in/ginny-truong-659051197/"
+                  target="_blank"
                   style={{
                     textDecoration: 'none',
                     color: 'black',
                     fontWeight: 'bold',
                     fontSize: '15px'
                   }}
+                  rel="noreferrer"
                 >
                   Ginny Truong
                 </a>
@@ -62,12 +64,14 @@ export default function About() {
               <div>
                 <a
                   href="https://www.linkedin.com/in/acldiamond/"
+                  target="_blank"
                   style={{
                     textDecoration: 'none',
                     color: 'black',
                     fontWeight: 'bold',
                     fontSize: '15px'
                   }}
+                  rel="noreferrer"
                 >
                   Alexander Diamond
                 </a>
@@ -75,12 +79,14 @@ export default function About() {
               <div>
                 <a
                   href="https://www.linkedin.com/in/christopher-li-446073154/"
+                  target="_blank"
                   style={{
                     textDecoration: 'none',
                     color: 'black',
                     fontWeight: 'bold',
                     fontSize: '15px'
                   }}
+                  rel="noreferrer"
                 >
                   Chris Li
                 </a>
@@ -88,12 +94,14 @@ export default function About() {
               <div>
                 <a
                   href="https://www.linkedin.com/in/callum-davidson-93a13a175/"
+                  target="_blank"
                   style={{
                     textDecoration: 'none',
                     color: 'black',
                     fontWeight: 'bold',
                     fontSize: '15px'
                   }}
+                  rel="noreferrer"
                 >
                   Callum Davidson
                 </a>
@@ -101,12 +109,14 @@ export default function About() {
               <div>
                 <a
                   href="https://www.linkedin.com/in/nicolahorynska/"
+                  target="_blank"
                   style={{
                     textDecoration: 'none',
                     color: 'black',
                     fontWeight: 'bold',
                     fontSize: '15px'
                   }}
+                  rel="noreferrer"
                 >
                   Nicola Grzebyk
                 </a>
