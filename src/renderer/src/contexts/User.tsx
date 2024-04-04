@@ -30,6 +30,7 @@ export const UserProvider: React.FC<any> = ({ children }) => {
   }
 
   const [modelComplexity, setModelComplexity] = useState(savedSettingsChecker('modelComplexity', 2))
+
   const [camera, setCamera] = useState(savedSettingsChecker('camera', ''))
   const [postureStrictness, setPostureStrictness] = useState(
     savedSettingsChecker('postureStrictness', '1')
