@@ -43,10 +43,10 @@ const Statistics: React.FC = () => {
             onClick={() => handleChange('4')}
             variant={chartType === '4' ? 'contained' : 'outlined'}
             sx={{
-              bgcolor: '#0064C5',
+              bgcolor: chartType === '4' ? '#89c9fb' : '#0064C5',
               color: 'white',
               '&:hover': {
-                bgcolor: '#89c9fb'
+                bgcolor: chartType === '4' ? '#89c9fb' : '#ADD8E6'
               }
             }}
           >
@@ -56,10 +56,10 @@ const Statistics: React.FC = () => {
             onClick={() => handleChange('1')}
             variant={chartType === '1' ? 'contained' : 'outlined'}
             sx={{
-              bgcolor: '#0064C5',
+              bgcolor: chartType === '1' ? '#89c9fb' : '#0064C5',
               color: 'white',
               '&:hover': {
-                bgcolor: '#89c9fb'
+                bgcolor: chartType === '1' ? '#89c9fb' : '#ADD8E6'
               }
             }}
           >
@@ -69,10 +69,10 @@ const Statistics: React.FC = () => {
             onClick={() => handleChange('2')}
             variant={chartType === '2' ? 'contained' : 'outlined'}
             sx={{
-              bgcolor: '#0064C5',
+              bgcolor: chartType === '2' ? '#89c9fb' : '#0064C5',
               color: 'white',
               '&:hover': {
-                bgcolor: '#89c9fb'
+                bgcolor: chartType === '2' ? '#89c9fb' : '#ADD8E6'
               }
             }}
           >
@@ -82,10 +82,10 @@ const Statistics: React.FC = () => {
             onClick={() => handleChange('3')}
             variant={chartType === '3' ? 'contained' : 'outlined'}
             sx={{
-              bgcolor: '#0064C5',
+              bgcolor: chartType === '3' ? '#89c9fb' : '#0064C5',
               color: 'white',
               '&:hover': {
-                bgcolor: '#89c9fb'
+                bgcolor: chartType === '3' ? '#89c9fb' : '#ADD8E6'
               }
             }}
           >

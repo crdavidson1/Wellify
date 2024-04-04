@@ -54,7 +54,8 @@ const Settings: React.FC = () => {
         component="div"
         sx={{
           flexGrow: 1,
-          textAlign: 'center',
+          textAlign: 'left',
+          paddingLeft: '5%',
           marginTop: '20px',
           fontWeight: 'bold',
           color: 'black',
@@ -77,8 +78,7 @@ const Settings: React.FC = () => {
           value={camera}
           onChange={handleCameraChange}
           style={{ minWidth: '150px' }}
-          label="Camera"
-          id="camera"
+          inputProps={{ 'aria-label': 'Without label' }}
         >
           {cameras.map((camera) => (
             <MenuItem key={camera} value={camera}>
@@ -94,8 +94,7 @@ const Settings: React.FC = () => {
           value={modelComplexity}
           onChange={handleChange}
           style={{ minWidth: '150px' }}
-          label="Model Performance"
-          id="model-performance"
+          inputProps={{ 'aria-label': 'Without label' }}
         >
           <MenuItem key="0" value={0}>
             Lite
@@ -114,8 +113,7 @@ const Settings: React.FC = () => {
           value={postureStrictness}
           onChange={handlePostureChange}
           style={{ minWidth: '150px' }}
-          label="Posture Strictness"
-          id="posture-strictness"
+          inputProps={{ 'aria-label': 'Without label' }}
         >
           <MenuItem value="1.5">Low</MenuItem>
           <MenuItem value="1">Medium</MenuItem>

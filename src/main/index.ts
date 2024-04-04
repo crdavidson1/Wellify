@@ -1,10 +1,15 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron'
+import { app, shell, BrowserWindow, ipcMain, nativeImage } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import {getActiveWindow} from './script.js'
 import axios from 'axios'
 import { getEmotions } from './script'
+
+const image = nativeImage.createFromPath(app.getAppPath() + '/resources/icon.png')
+app.dock.setIcon(image)
+
+app.setAppUserModelId('Wellify')
 
 function createWindow(): void {
   // Create the browser window.
