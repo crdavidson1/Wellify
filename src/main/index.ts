@@ -6,7 +6,9 @@ import getActiveWindow from './script.js'
 import axios from 'axios'
 
 const image = nativeImage.createFromPath(app.getAppPath() + '/resources/icon.png')
-app.dock.setIcon(image);
+app.dock.setIcon(image)
+
+app.setAppUserModelId('Wellify')
 
 function createWindow(): void {
   // Create the browser window.
@@ -30,7 +32,6 @@ function createWindow(): void {
     maxWidth: 1200,
     maxHeight: 700,
     show: false,
-    title: 'Wellify',
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
