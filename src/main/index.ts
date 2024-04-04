@@ -4,12 +4,9 @@ import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import {getActiveWindow} from './script.js'
 import axios from 'axios'
-import { getEmotions } from './script'
+import { getEmotions, login } from './script'
 
-const image = nativeImage.createFromPath(app.getAppPath() + '/resources/icon.png')
-app.dock.setIcon(image)
 
-app.setAppUserModelId('Wellify')
 
 function createWindow(): void {
   // Create the browser window.
@@ -87,6 +84,10 @@ app.whenReady().then(() => {
   })
   ipcMain.handle('get-emotions', () => {
     return getEmotions()
+  })
+  ipcMain.handle('log-in', (e, username, password) => {
+   
+    return login(username, password)
   })
     
   createWindow()

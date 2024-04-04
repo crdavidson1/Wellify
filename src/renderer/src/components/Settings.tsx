@@ -7,6 +7,8 @@ const Settings: React.FC = () => {
   const { modelComplexity, setModelComplexity } = useContext(UserContext)
   const { camera, setCamera } = useContext(UserContext)
   const { postureStrictness, setPostureStrictness } = useContext(UserContext)
+  const { userName, setUserName } = useContext(UserContext)
+  const [loginError, setLoginError] = useState(false)
   const [cameras, setCameras] = useState<string[]>([])
   const [cameraRefresh, setCameraRefresh] = useState<boolean>()
 
@@ -47,6 +49,22 @@ const Settings: React.FC = () => {
     localStorage.setItem('postureStrictness', JSON.stringify(event.target.value))
   }
 
+  async function handleSubmit(e): Promise<void> {
+    e.preventDefault()
+    
+    const loggedIn = await window.wellifyAPI.login(e.target[0].value, e.target[1].value)
+    console.log(loggedIn);
+    
+    if (!loggedIn) {
+      setUserName('')
+      setLoginError(true)
+    }
+    else {
+      setUserName(e.target[0].value)
+      setLoginError(false)
+    }
+  }
+
   return (
     <div>
       <Typography
@@ -72,6 +90,14 @@ const Settings: React.FC = () => {
           width: '90%'
         }}
       >
+        {userName === '' ? "Not logged in": `Logged in as ${userName}`}
+        <br/>
+        <label>User</label>
+        <form onSubmit={handleSubmit}>
+          <input placeholder={"username"} style={{ minWidth: '150px' }} type='text' />
+          <input placeholder={"password"} style={{ minWidth: '150px' }} type='text' />
+          <button>Log In</button>
+        </form>
         <br />
         <label>Camera: </label>
         <Select
