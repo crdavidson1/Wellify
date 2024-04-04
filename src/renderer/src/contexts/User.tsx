@@ -1,8 +1,8 @@
 import React, { createContext, useState } from 'react'
 
 export const UserContext = createContext<{
-  modelComplexity: 0 | 1 | 2 | undefined
-  setModelComplexity: (newValue: string) => void
+  modelComplexity: 0 | 2 | 1
+  setModelComplexity: (newValue: any) => void
   camera: string
   setCamera: (newValue: string) => void
   postureStrictness: string
@@ -29,9 +29,8 @@ export const UserProvider: React.FC<any> = ({ children }) => {
     return defaultValue
   }
 
-  const [modelComplexity, setModelComplexity] = useState(
-    savedSettingsChecker('modelComplexity', 2)
-  )
+  const [modelComplexity, setModelComplexity] = useState(savedSettingsChecker('modelComplexity', 2))
+
   const [camera, setCamera] = useState(savedSettingsChecker('camera', ''))
   const [postureStrictness, setPostureStrictness] = useState(
     savedSettingsChecker('postureStrictness', '1')
