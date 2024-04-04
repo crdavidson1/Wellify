@@ -9,12 +9,12 @@ const EyeDistance = ({
   setTooCloseCount
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }: any): null => {
-  const { postureStrictness } = useContext(UserContext)
-  if (postureData && startPosition) {
-    useEffect(() => {
+  const { postureStrictness, alertFrequency } = useContext(UserContext)
+  useEffect(() => {
+    if (postureData && startPosition) {
       if (
         postureData.poseLandmarks[0].z <
-        startPosition.poseLandmarks[0].z * (1 + Number(postureStrictness) / 10)
+        startPosition.poseLandmarks[0].z * (1.1 + Number(postureStrictness) / 10)
       ) {
         setTooCloseCount((currCount) => {
           return currCount + 2
@@ -28,12 +28,17 @@ const EyeDistance = ({
           }
         })
       }
-    }, [postureData])
-  }
-  if (tooCloseCount > 100) {
-    setTooCloseCount(0)
-    Notifier('Eye Health Alert', 'Please move face further away from screen')
-  }
+    }
+  }, [postureData, postureStrictness, startPosition])
+
+  useEffect(() => {
+    console.log(tooCloseCount)
+    if (tooCloseCount > alertFrequency) {
+      setTooCloseCount(0)
+      Notifier('Eye Health Alert', 'Please move face further away from screen')
+    }
+  }, [tooCloseCount])
+
   return null
 }
 

@@ -7,6 +7,7 @@ const Settings: React.FC = () => {
   const { modelComplexity, setModelComplexity } = useContext(UserContext)
   const { camera, setCamera } = useContext(UserContext)
   const { postureStrictness, setPostureStrictness } = useContext(UserContext)
+  const { alertFrequency, setAlertFrequency } = useContext(UserContext)
   const [cameras, setCameras] = useState<string[]>([])
   const [cameraRefresh, setCameraRefresh] = useState<boolean>()
 
@@ -47,6 +48,11 @@ const Settings: React.FC = () => {
     localStorage.setItem('postureStrictness', JSON.stringify(event.target.value))
   }
 
+  function handleAlertFrequency(event): void {
+    setAlertFrequency(event.target.value)
+    localStorage.setItem('alertFrequency', JSON.stringify(event.target.value))
+  }
+
   return (
     <div>
       <Typography
@@ -73,23 +79,7 @@ const Settings: React.FC = () => {
         }}
       >
         <br />
-        <label>Camera: </label>
-        <Select
-          value={camera}
-          onChange={handleCameraChange}
-          style={{ minWidth: '150px' }}
-          inputProps={{ 'aria-label': 'Without label' }}
-        >
-          {cameras.map((camera) => (
-            <MenuItem key={camera} value={camera}>
-              {camera}
-            </MenuItem>
-          ))}
-        </Select>
-        <Button onClick={reloadCamera}>Refresh</Button>
-        <br />
-        <br />
-        <label>Model Performance: </label>
+        <label style={{ paddingRight: '10px' }}>Model Performance: </label>
         <Select
           value={modelComplexity}
           onChange={handleChange}
@@ -108,7 +98,7 @@ const Settings: React.FC = () => {
         </Select>
         <br />
         <br />
-        <label>Posture Strictness: </label>
+        <label style={{ paddingRight: '25px' }}>Posture Strictness:</label>
         <Select
           value={postureStrictness}
           onChange={handlePostureChange}
@@ -118,6 +108,20 @@ const Settings: React.FC = () => {
           <MenuItem value="1.5">Low</MenuItem>
           <MenuItem value="1">Medium</MenuItem>
           <MenuItem value="0.5">High</MenuItem>
+        </Select>
+        <br />
+        <br />
+        <label style={{ paddingRight: '35px' }}>Alert Frequency:</label>
+        <Select
+          value={alertFrequency}
+          onChange={handleAlertFrequency}
+          style={{ minWidth: '150px' }}
+          inputProps={{ 'aria-label': 'Without label' }}
+        >
+          <MenuItem value="2000">Low</MenuItem>
+          <MenuItem value="1000">Medium</MenuItem>
+          <MenuItem value="500">High</MenuItem>
+          <MenuItem value="100">Irritating</MenuItem>
         </Select>
       </div>
     </div>
