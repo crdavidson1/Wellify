@@ -1,5 +1,4 @@
-# wellify
-Snack-Overflow Project - Machine learning based prompter for better workplace health
+# Wellify
 
 ## Table of Contents
 
@@ -7,8 +6,7 @@ Snack-Overflow Project - Machine learning based prompter for better workplace he
 - [Install](#install)
 - [Usage](#usage)
     - [Running a Local Version](#running-a-local-version)
-    - [Deploying a Production Version (WIP)](#deploying-a-production-version)
-- [Deployed Version (WIP)](#deployed-version)
+    - [Production Version](#production-version)
 
 ## Project Summary
 
@@ -16,20 +14,20 @@ Wellify is a desktop application that applies posture detection and emotion trac
 
 ## Install
 
-WIP
+To run this project, the repo must be cloned in your local directory.
+
+This project relies on [node](http://nodejs.org) and MySQL for the back-end, and uses Typescript, React and Electron for the front-end.
 
 ## Usage
 
-WIP
-
 ### Running a Local Version
 
-WIP
+To run a local development version of the web app, use the following command.
 
-### Deploying a Production Version
+```sh
+$ npm run dev
+```
 
-WIP
-
-## Deployed Version
+### Production Version
 
 WIP

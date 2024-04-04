@@ -9,6 +9,8 @@ export const UserContext = createContext<{
   setPostureStrictness: (newValue: string) => void
   userName: string
   setUserName: (newUsername: string) => void
+  alertFrequency: string
+  setAlertFrequency: (newValue: string) => void
 }>({
   modelComplexity: 2,
   setModelComplexity: () => undefined,
@@ -18,6 +20,8 @@ export const UserContext = createContext<{
   setPostureStrictness: () => undefined,
   userName: '',
   setUserName: () => undefined
+  alertFrequency: '',
+  setAlertFrequency: () => undefined
 })
 
 export const UserProvider: React.FC<any> = ({ children }) => {
@@ -40,6 +44,9 @@ export const UserProvider: React.FC<any> = ({ children }) => {
     savedSettingsChecker('postureStrictness', '1')
   )
   const [userName, setUserName] = useState('')
+  const [alertFrequency, setAlertFrequency] = useState(
+    savedSettingsChecker('alertFrequency', '1000')
+  )
   return (
     <UserContext.Provider
       value={{
@@ -51,6 +58,8 @@ export const UserProvider: React.FC<any> = ({ children }) => {
         setPostureStrictness,
         userName,
         setUserName
+        alertFrequency,
+        setAlertFrequency
       }}
     >
       {children}

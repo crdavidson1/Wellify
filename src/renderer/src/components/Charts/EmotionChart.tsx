@@ -31,7 +31,7 @@ const EmotionChart: React.FC = () => {
     labels: ['Happy', 'Sad', 'Angry', 'Fear', 'Disgust', 'Neutral'],
     datasets: [
       {
-        label: '# of Votes',
+        label: '% of Time',
         data: [12, 19, 3, 5, 2, 3],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
