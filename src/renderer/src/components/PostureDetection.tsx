@@ -85,8 +85,8 @@ const PostureDetection: React.FC<any> = ({ webcamRef }) => {
         camera = new cam.Camera(webcamRef.current, {
           onFrame: async (): Promise<void> => {
             const canvasElement = canvasRef.current
-            const width = 640
-            const height = 480
+            const width = 1280
+            const height = 720
             if (canvasElement) {
               canvasElement.width = width
               canvasElement.height = height
