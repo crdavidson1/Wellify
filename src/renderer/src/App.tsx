@@ -9,6 +9,7 @@ import EmotionNotification from './components/EmotionNotification'
 import NotifButton from './components/NotifButton'
 import Sidebar from './Sidebar'
 import { UserProvider } from './contexts/User'
+
 const App: React.FC = () => {
   return (
     <UserProvider>
@@ -26,6 +27,7 @@ const App: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/statistics" element={<Statistics />} />
+            <Route path="/about" element={<About />} />
           </Routes>
         </div>
       </div>
