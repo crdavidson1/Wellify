@@ -4,6 +4,7 @@ import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material'
+import Wellify from '../components/Wellify_1.png'
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -19,7 +20,13 @@ export default function About() {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Item>
-            <div>INSERT IMAGE HERE</div>
+            <div>
+              <img
+                src={Wellify}
+                alt="wellify logo with dark blue backgroudna dn teal icon inside"
+                style={{ width: 'auto', height: '250px' }}
+              />
+            </div>
           </Item>
         </Grid>
         <Grid item xs={12}>
