@@ -1,9 +1,12 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron'
+import { app, shell, BrowserWindow, ipcMain, nativeImage } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import icon from '../../resources/icon.png?asset'
+// import icon from '../../resources/icon.png?asset'
 import getActiveWindow from './script.js'
 import axios from 'axios'
+
+const image = nativeImage.createFromPath(app.getAppPath() + '/resources/icon.png')
+app.dock.setIcon(image);
 
 function createWindow(): void {
   // Create the browser window.
@@ -27,6 +30,7 @@ function createWindow(): void {
     maxWidth: 1200,
     maxHeight: 700,
     show: false,
+    title: 'Wellify',
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
@@ -78,8 +82,8 @@ app.whenReady().then(() => {
   })
   ipcMain.handle('get-window', () => {
     return getActiveWindow()
-  })  
-    
+  })
+
   createWindow()
 
   app.on('activate', function () {
