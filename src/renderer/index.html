@@ -4,6 +4,25 @@
     <meta charset="UTF-8" />
     <title>Wellify</title>
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
+    default-src 'self';
+    script-src 'self' 'unsafe-eval'
+               https://sdk.morphcast.com
+               https://ai-sdk.morphcast.com
+               https://cdn.jsdelivr.net;
+    img-src 'self' https:;
+    style-src 'self' 'unsafe-inline';
+    connect-src 'self'
+                https://sdk.morphcast.com
+                https://ai-sdk.morphcast.com
+                https://cdn.jsdelivr.net
+                https://api-sdk.morphcast.com
+                https://cdn-api-sdk.morphcast.com;
+    worker-src 'self' blob: data:;
+  "
+    />
   </head>
 
   <body>

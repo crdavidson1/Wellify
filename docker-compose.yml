@@ -9,5 +9,7 @@ services:
       MYSQL_PASSWORD: Ccgnx2024!
     ports:
       - "3306:3306"
-    command: ["sh", "-c", "mysql < /app/src/backend/database/seeds/setup.sql && ts-node /app/src/backend/database/seeds/runSeed.ts"]
+    expose:
+      - '3306'
+    # command: ["sh", "-c", "mysql < /app/src/backend/database/seeds/setup.sql && ts-node /app/src/backend/database/seeds/runSeed.ts"]
 

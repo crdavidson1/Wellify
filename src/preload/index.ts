@@ -16,7 +16,8 @@ if (process.contextIsolated) {
       check: () => ipcRenderer.invoke('internal:check'),
       loki: () => ipcRenderer.invoke('internal:check'),
       checkAPI: (name) => ipcRenderer.invoke('internal:apiCheck', name),
-      getWindow: () => ipcRenderer.invoke('get-window')
+      getWindow: () => ipcRenderer.invoke('get-window'),
+      getEmotions: () => ipcRenderer.invoke('get-emotions')
     })
   } catch (error) {
     console.error(error)

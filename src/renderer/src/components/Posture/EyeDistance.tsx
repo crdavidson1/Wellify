@@ -8,7 +8,7 @@ const EyeDistance = ({
   tooCloseCount,
   setTooCloseCount
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-}: any): void => {
+}: any): null => {
   const { postureStrictness } = useContext(UserContext)
   if (postureData && startPosition) {
     useEffect(() => {
@@ -34,7 +34,7 @@ const EyeDistance = ({
     setTooCloseCount(0)
     Notifier('Eye Health Alert', 'Please move face further away from screen')
   }
-  return
+  return null
 }
 
 export default EyeDistance

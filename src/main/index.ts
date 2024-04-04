@@ -1,9 +1,10 @@
 import { app, shell, BrowserWindow, ipcMain, nativeImage } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-// import icon from '../../resources/icon.png?asset'
-import getActiveWindow from './script.js'
+import icon from '../../resources/icon.png?asset'
+import {getActiveWindow} from './script.js'
 import axios from 'axios'
+import { getEmotions } from './script'
 
 const image = nativeImage.createFromPath(app.getAppPath() + '/resources/icon.png')
 app.dock.setIcon(image)
@@ -84,7 +85,10 @@ app.whenReady().then(() => {
   ipcMain.handle('get-window', () => {
     return getActiveWindow()
   })
-
+  ipcMain.handle('get-emotions', () => {
+    return getEmotions()
+  })
+    
   createWindow()
 
   app.on('activate', function () {
