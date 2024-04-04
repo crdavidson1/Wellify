@@ -8,7 +8,7 @@ import Button from '@mui/material/Button'
 import ButtonGroup from '@mui/material/ButtonGroup'
 
 const Statistics: React.FC = () => {
-  const [chartType, setChartType] = useState()
+  const [chartType, setChartType] = useState('4')
 
   function handleChange(value) {
     setChartType(value)

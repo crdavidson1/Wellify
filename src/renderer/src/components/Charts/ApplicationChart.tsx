@@ -19,7 +19,7 @@ const ApplicationChart: React.FC = () => {
     plugins: {
       title: {
         display: true,
-        text: 'Emotions by Application'
+        text: 'Emotion Events by Application'
       }
     },
     responsive: true,
@@ -40,32 +40,32 @@ const ApplicationChart: React.FC = () => {
     datasets: [
       {
         label: 'Happy',
-        data: labels.map(() => faker.number.int({ min: 0, max: 1000 })),
+        data: labels.map(() => faker.number.int({ min: 0, max: 100 })),
         backgroundColor: 'rgb(255, 99, 132)'
       },
       {
         label: 'Sad',
-        data: labels.map(() => faker.number.int({ min: 0, max: 1000 })),
+        data: labels.map(() => faker.number.int({ min: 0, max: 100 })),
         backgroundColor: 'rgb(75, 192, 192)'
       },
       {
         label: 'Angry',
-        data: labels.map(() => faker.number.int({ min: 0, max: 1000 })),
+        data: labels.map(() => faker.number.int({ min: 0, max: 100 })),
         backgroundColor: 'rgb(53, 162, 235)'
       },
       {
         label: 'Fear',
-        data: labels.map(() => faker.number.int({ min: 0, max: 1000 })),
+        data: labels.map(() => faker.number.int({ min: 0, max: 100 })),
         backgroundColor: 'rgb(255, 206, 86'
       },
       {
         label: 'Disgust',
-        data: labels.map(() => faker.number.int({ min: 0, max: 1000 })),
+        data: labels.map(() => faker.number.int({ min: 0, max: 100 })),
         backgroundColor: 'rgb(255, 159, 64)'
       },
       {
         label: 'Neutral',
-        data: labels.map(() => faker.number.int({ min: 0, max: 1000 })),
+        data: labels.map(() => faker.number.int({ min: 0, max: 100 })),
         backgroundColor: 'rgb(153, 102, 255)'
       }
     ]

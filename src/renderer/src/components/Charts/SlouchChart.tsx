@@ -34,7 +34,7 @@ const SlouchChart: React.FC = () => {
     labels,
     datasets: [
       {
-        label: 'Number of slouches',
+        label: 'Number of Slouches',
         data: labels.map(() => faker.datatype.number({ min: 0, max: 20 })),
         backgroundColor: '#222222'
       }
