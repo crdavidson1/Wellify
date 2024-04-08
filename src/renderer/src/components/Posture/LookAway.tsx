@@ -50,7 +50,7 @@ const LookAway = ({
 
   useEffect(() => {
     console.log(notLookedAwayCount)
-    if (notLookedAwayCount > 200 + Number(alertFrequency)) {
+    if (notLookedAwayCount > 100 + Number(alertFrequency)) {
       setNotLookedAwayCount(0)
       Notifier('Eye Health Alert', 'Please take a moment to look away from your screen')
     }

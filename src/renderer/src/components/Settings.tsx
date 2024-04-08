@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect, useContext } from 'react'
 import { UserContext } from '@renderer/contexts/User'
-import { Select, MenuItem, Button, Typography } from '@mui/material'
+import { Select, MenuItem, Typography } from '@mui/material'
 
 const Settings: React.FC = () => {
   const { modelComplexity, setModelComplexity } = useContext(UserContext)
@@ -52,18 +52,18 @@ const Settings: React.FC = () => {
 
   async function handleSubmit(e): Promise<void> {
     e.preventDefault()
-    
+
     const loggedIn = await window.wellifyAPI.login(e.target[0].value, e.target[1].value)
-    console.log(loggedIn);
-    
+    console.log(loggedIn)
+
     if (!loggedIn) {
       setUserName('')
       setLoginError(true)
-    }
-    else {
+    } else {
       setUserName(e.target[0].value)
       setLoginError(false)
     }
+  }
   function handleAlertFrequency(event): void {
     setAlertFrequency(event.target.value)
     localStorage.setItem('alertFrequency', JSON.stringify(event.target.value))
@@ -94,14 +94,30 @@ const Settings: React.FC = () => {
           width: '90%'
         }}
       >
-        {userName === '' ? "Not logged in": `Logged in as ${userName}`}
-        <br/>
-        <label>User</label>
+        <Typography
+          variant="h6"
+          component="div"
+          sx={{
+            flexGrow: 1,
+            textAlign: 'left',
+            marginTop: '10px',
+            color: 'black',
+            fontSize: '1.3rem',
+            '& span': {
+              color: '#0064C5'
+            }
+          }}
+        >
+          Logged in as <span>Regular_joe</span>
+        </Typography>
+        {/* {userName === '' ? 'Not logged in' : `Logged in as ${userName}`} */}
+        <br />
+        {/* <label>User</label>
         <form onSubmit={handleSubmit}>
-          <input placeholder={"username"} style={{ minWidth: '150px' }} type='text' />
-          <input placeholder={"password"} style={{ minWidth: '150px' }} type='text' />
+          <input placeholder={'username'} style={{ minWidth: '150px' }} type="text" />
+          <input placeholder={'password'} style={{ minWidth: '150px' }} type="text" />
           <button>Log In</button>
-        </form>
+        </form> */}
         <br />
         <label style={{ paddingRight: '10px' }}>Model Performance: </label>
         <Select
@@ -111,13 +127,13 @@ const Settings: React.FC = () => {
           inputProps={{ 'aria-label': 'Without label' }}
         >
           <MenuItem key="0" value={0}>
-            Lite
+            Low
           </MenuItem>
           <MenuItem key="1" value={1}>
-            Full
+            Medium
           </MenuItem>
           <MenuItem key="2" value={2}>
-            Heavy
+            High
           </MenuItem>
         </Select>
         <br />

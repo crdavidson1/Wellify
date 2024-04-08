@@ -19,7 +19,7 @@ export const UserContext = createContext<{
   postureStrictness: '',
   setPostureStrictness: () => undefined,
   userName: '',
-  setUserName: () => undefined
+  setUserName: () => undefined,
   alertFrequency: '',
   setAlertFrequency: () => undefined
 })
@@ -57,7 +57,7 @@ export const UserProvider: React.FC<any> = ({ children }) => {
         postureStrictness,
         setPostureStrictness,
         userName,
-        setUserName
+        setUserName,
         alertFrequency,
         setAlertFrequency
       }}

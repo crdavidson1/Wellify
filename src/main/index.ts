@@ -6,7 +6,12 @@ import {getActiveWindow} from './script.js'
 import axios from 'axios'
 import { getEmotions, login } from './script'
 
+const image = nativeImage.createFromPath(app.getAppPath() + '/resources/icon.png')
+if (process.platform === 'darwin') {
+  app.dock.setIcon(image)
+}
 
+app.setAppUserModelId('wellify')
 
 function createWindow(): void {
   // Create the browser window.
