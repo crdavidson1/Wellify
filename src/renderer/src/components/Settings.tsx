@@ -63,7 +63,6 @@ const Settings: React.FC = () => {
       setUserName(e.target[0].value)
       setLoginError(false)
     }
-
   }
   function handleAlertFrequency(event): void {
     setAlertFrequency(event.target.value)
@@ -145,75 +144,28 @@ const Settings: React.FC = () => {
           onChange={handlePostureChange}
           style={{ minWidth: '150px' }}
           inputProps={{ 'aria-label': 'Without label' }}
-
         >
-          Settings
-        </Typography>
-        <div
-          style={{
-            justifyContent: 'center',
-            paddingLeft: '5%',
-            paddingTop: '5%',
-            width: '90%'
-          }}
+          <MenuItem value="1.5">Low</MenuItem>
+          <MenuItem value="1">Medium</MenuItem>
+          <MenuItem value="0.5">High</MenuItem>
+        </Select>
+        <br />
+        <br />
+        <label style={{ paddingRight: '35px' }}>Alert Frequency:</label>
+        <Select
+          value={alertFrequency}
+          onChange={handleAlertFrequency}
+          style={{ minWidth: '150px' }}
+          inputProps={{ 'aria-label': 'Without label' }}
         >
-          {userName === '' ? 'Not logged in' : `Logged in as ${userName}`}
-          <br />
-          <label>User</label>
-          <form onSubmit={handleSubmit}>
-            <input placeholder={'username'} style={{ minWidth: '150px' }} type="text" />
-            <input placeholder={'password'} style={{ minWidth: '150px' }} type="text" />
-            <button>Log In</button>
-          </form>
-          <br />
-          <label style={{ paddingRight: '10px' }}>Model Performance: </label>
-          <Select
-            value={modelComplexity}
-            onChange={handleChange}
-            style={{ minWidth: '150px' }}
-            inputProps={{ 'aria-label': 'Without label' }}
-          >
-            <MenuItem key="0" value={0}>
-              Lite
-            </MenuItem>
-            <MenuItem key="1" value={1}>
-              Full
-            </MenuItem>
-            <MenuItem key="2" value={2}>
-              Heavy
-            </MenuItem>
-          </Select>
-          <br />
-          <br />
-          <label style={{ paddingRight: '25px' }}>Posture Strictness:</label>
-          <Select
-            value={postureStrictness}
-            onChange={handlePostureChange}
-            style={{ minWidth: '150px' }}
-            inputProps={{ 'aria-label': 'Without label' }}
-          >
-            <MenuItem value="1.5">Low</MenuItem>
-            <MenuItem value="1">Medium</MenuItem>
-            <MenuItem value="0.5">High</MenuItem>
-          </Select>
-          <br />
-          <br />
-          <label style={{ paddingRight: '35px' }}>Alert Frequency:</label>
-          <Select
-            value={alertFrequency}
-            onChange={handleAlertFrequency}
-            style={{ minWidth: '150px' }}
-            inputProps={{ 'aria-label': 'Without label' }}
-          >
-            <MenuItem value="2000">Low</MenuItem>
-            <MenuItem value="1000">Medium</MenuItem>
-            <MenuItem value="500">High</MenuItem>
-            <MenuItem value="100">Irritating</MenuItem>
-          </Select>
-        </div>
+          <MenuItem value="2000">Low</MenuItem>
+          <MenuItem value="1000">Medium</MenuItem>
+          <MenuItem value="500">High</MenuItem>
+          <MenuItem value="100">Irritating</MenuItem>
+        </Select>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default Settings
