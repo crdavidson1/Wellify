@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect, useContext } from 'react'
 import { UserContext } from '@renderer/contexts/User'
-import { Select, MenuItem, Button, Typography } from '@mui/material'
+import { Select, MenuItem, Typography } from '@mui/material'
 
 const Settings: React.FC = () => {
   const { modelComplexity, setModelComplexity } = useContext(UserContext)
@@ -63,25 +63,89 @@ const Settings: React.FC = () => {
       setUserName(e.target[0].value)
       setLoginError(false)
     }
-    function handleAlertFrequency(event): void {
-      setAlertFrequency(event.target.value)
-      localStorage.setItem('alertFrequency', JSON.stringify(event.target.value))
-    }
 
-    return (
-      <div>
+  }
+  function handleAlertFrequency(event): void {
+    setAlertFrequency(event.target.value)
+    localStorage.setItem('alertFrequency', JSON.stringify(event.target.value))
+  }
+
+  return (
+    <div>
+      <Typography
+        variant="h6"
+        component="div"
+        sx={{
+          flexGrow: 1,
+          textAlign: 'left',
+          paddingLeft: '5%',
+          marginTop: '20px',
+          fontWeight: 'bold',
+          color: 'black',
+          fontSize: '1.7rem'
+        }}
+      >
+        Settings
+      </Typography>
+      <div
+        style={{
+          justifyContent: 'center',
+          paddingLeft: '5%',
+          paddingTop: '5%',
+          width: '90%'
+        }}
+      >
         <Typography
           variant="h6"
           component="div"
           sx={{
             flexGrow: 1,
             textAlign: 'left',
-            paddingLeft: '5%',
-            marginTop: '20px',
-            fontWeight: 'bold',
+            marginTop: '10px',
             color: 'black',
-            fontSize: '1.7rem'
+            fontSize: '1.3rem',
+            '& span': {
+              color: '#0064C5'
+            }
           }}
+        >
+          Logged in as <span>Regular_joe</span>
+        </Typography>
+        {/* {userName === '' ? 'Not logged in' : `Logged in as ${userName}`} */}
+        <br />
+        {/* <label>User</label>
+        <form onSubmit={handleSubmit}>
+          <input placeholder={'username'} style={{ minWidth: '150px' }} type="text" />
+          <input placeholder={'password'} style={{ minWidth: '150px' }} type="text" />
+          <button>Log In</button>
+        </form> */}
+        <br />
+        <label style={{ paddingRight: '10px' }}>Model Performance: </label>
+        <Select
+          value={modelComplexity}
+          onChange={handleChange}
+          style={{ minWidth: '150px' }}
+          inputProps={{ 'aria-label': 'Without label' }}
+        >
+          <MenuItem key="0" value={0}>
+            Low
+          </MenuItem>
+          <MenuItem key="1" value={1}>
+            Medium
+          </MenuItem>
+          <MenuItem key="2" value={2}>
+            High
+          </MenuItem>
+        </Select>
+        <br />
+        <br />
+        <label style={{ paddingRight: '25px' }}>Posture Strictness:</label>
+        <Select
+          value={postureStrictness}
+          onChange={handlePostureChange}
+          style={{ minWidth: '150px' }}
+          inputProps={{ 'aria-label': 'Without label' }}
+
         >
           Settings
         </Typography>
