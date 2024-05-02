@@ -1,12 +1,8 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
 import { styled } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
-import Typography from '@mui/material'
 import Wellify from '../components/Wellify-napis.png'
-import { getCustomers } from '../api'
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -17,13 +13,6 @@ const Item = styled(Paper)(({ theme }) => ({
 }))
 
 export default function About() {
-  const [customers, setCustomers] = useState({})
-  useEffect(() => {
-    getCustomers().then((response) => {
-      setCustomers(response.data.customers)
-    })
-  }, [])
-  console.log(customers)
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
