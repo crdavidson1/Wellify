@@ -1,7 +1,7 @@
 import axios from "axios"
 
-const getCustomers = () => {
-  return axios.get(`http://localhost:9090/customers`).then((data) => {
+const getUsers = () => {
+  return axios.get(`http://localhost:9090/users`).then((data) => {
     return data
   })
 }
@@ -13,4 +13,11 @@ const getEvents = () => {
   })
 }
 
-export { getCustomers, getEvents }
+const getUserEvents = (user_id) => {
+  return axios.get(`http://localhost:9090/events/${user_id}`).then((data) => {
+    console.log(data)
+    return data
+  })
+}
+
+export { getUsers, getEvents, getUserEvents }
