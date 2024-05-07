@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios from 'axios'
 
 const getUsers = () => {
   return axios.get(`http://localhost:9090/users`).then((data) => {
@@ -7,17 +7,22 @@ const getUsers = () => {
 }
 
 const getEvents = () => {
-  return axios.get(`http://localhost:9090/events`).then((data) => {
-    console.log(data)
+  return axios.get(`http://localhost:9090/events/posture`).then((data) => {
     return data
   })
 }
 
-const getUserEvents = (user_id) => {
-  return axios.get(`http://localhost:9090/events/${user_id}`).then((data) => {
-    console.log(data)
+const getUserPostureEvents = (user_id) => {
+  return axios.get(`http://localhost:9090/events/posture/${user_id}`).then((data) => {
     return data
   })
 }
 
-export { getUsers, getEvents, getUserEvents }
+const getUserEmotionEvents = (user_id) => {
+  return axios.get(`http://localhost:9090/events/emotion/${user_id}`).then((data) => {
+    return data
+  })
+}
+
+
+export { getUsers, getEvents, getUserPostureEvents, getUserEmotionEvents }

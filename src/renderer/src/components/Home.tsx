@@ -1,8 +1,7 @@
 import React from 'react'
-import { useRef, useEffect, useState } from 'react'
+import { useRef } from 'react'
 import PostureDetection from './PostureDetection'
 import EmotionTracking from './EmotionTracking'
-import { getUsers, getEvents, getUserEvents } from '../api.js'
 
 const Home: React.FC<any> = () => {
   const webcamRef = useRef<HTMLVideoElement>(null)
@@ -11,23 +10,6 @@ const Home: React.FC<any> = () => {
     return res
   }
   getActiveWindow()
-  const [users, setUsers] = useState({})
-  const [events, setEvents] = useState({})
-  const [userEvents, setUserEvents] = useState({})
-  useEffect(() => {
-    getUsers().then((response) => {
-      setUsers(response.data.users)
-    })
-    getEvents().then((response) => {
-      setEvents(response.data.events)
-    })
-    getUserEvents(1).then((response) => {
-      setUserEvents(response.data.events)
-    })
-  }, [])
-  console.log(users)
-  console.log(events)
-  console.log(userEvents)
   return (
     <div
       style={{

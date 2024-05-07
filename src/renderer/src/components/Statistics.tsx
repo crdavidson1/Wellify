@@ -1,19 +1,40 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { UserContext } from '@renderer/contexts/User'
 import SlouchChart from './Charts/SlouchChart'
 import EmotionChart from './Charts/EmotionChart'
 import ApplicationChart from './Charts/ApplicationChart'
 import SummaryChart from './Charts/SummaryChart'
 import Button from '@mui/material/Button'
 import ButtonGroup from '@mui/material/ButtonGroup'
+import { getUsers, getEvents, getUserPostureEvents, getUserEmotionEvents } from '../api.js'
 
 const Statistics: React.FC = () => {
   const [chartType, setChartType] = useState('4')
+  const {users, setUsers} = useContext(UserContext)
+  const {events, setEvents} = useContext(UserContext)
+  const {userPostureEvents, setUserPostureEvents} = useContext(UserContext)
+  const {userEmotionEvents, setUserEmotionEvents} = useContext(UserContext)
+
+  useEffect(() => {
+    getUsers().then((response) => {
+      setUsers(response.data.users)
+    })
+    getEvents().then((response) => {
+      setEvents(response.data.events)
+    })
+    getUserPostureEvents(1).then((response) => {
+      setUserPostureEvents(response.data.events)
+    })
+    getUserEmotionEvents(1).then((response) => {
+      setUserEmotionEvents(response.data.events)
+    })
+  }, [])
 
   function handleChange(value) {
     setChartType(value)
   }
-  let chart = <SlouchChart />
+  let chart = <SlouchChart/>
   if (chartType === '1') {
     chart = <SlouchChart />
   }

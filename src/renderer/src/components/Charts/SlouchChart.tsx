@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { UserContext } from '@renderer/contexts/User'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,11 +11,23 @@ import {
   Legend
 } from 'chart.js'
 import { Bar } from 'react-chartjs-2'
-import { faker } from '@faker-js/faker'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Title, Tooltip, Legend)
 
+interface Event {
+  user_id: number
+  event_type: string
+  event_time: number
+}
+
 const SlouchChart: React.FC = () => {
+  const {userPostureEvents} = useContext(UserContext)
+  const getEventsByDay = (dayOfWeek: number): Event[] => {
+    return userPostureEvents.filter(event => {
+      const eventDate = new Date(event.event_time)
+      return eventDate.getDay() === dayOfWeek;
+    })
+  }
   const options = {
     responsive: true,
     plugins: {
@@ -35,7 +48,7 @@ const SlouchChart: React.FC = () => {
     datasets: [
       {
         label: 'Number of Slouches',
-        data: labels.map(() => faker.datatype.number({ min: 0, max: 20 })),
+        data: labels.map((label) => getEventsByDay(labels.indexOf(label)).length),
         backgroundColor: '#222222'
       }
     ]

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,10 +10,26 @@ import {
   Legend
 } from 'chart.js'
 import { Pie } from 'react-chartjs-2'
+import { UserContext } from '@renderer/contexts/User'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Title, Tooltip, Legend)
 
+interface Event {
+  user_id: number
+  event_type: string
+  event_time: number
+}
+
 const EmotionChart: React.FC = () => {
+  const {userEmotionEvents} = useContext(UserContext)
+  const totalEvents = userEmotionEvents.length
+  console.log(userEmotionEvents)
+  const getEventsByEmotion = (emotion: string): Event[] => {
+    return userEmotionEvents.filter(event => {
+      return event.event_type === emotion;
+    })
+  }
+
   const options2 = {
     responsive: true,
     plugins: {
@@ -27,12 +43,14 @@ const EmotionChart: React.FC = () => {
     }
   }
 
+  const labels = ['Happy', 'Sad', 'Angry', 'Fear', 'Disgust', 'Neutral']
+
   const data2 = {
-    labels: ['Happy', 'Sad', 'Angry', 'Fear', 'Disgust', 'Neutral'],
+    labels: labels,
     datasets: [
       {
         label: '% of Time',
-        data: [12, 19, 3, 5, 2, 3],
+        data: labels.map((label) => getEventsByEmotion(label).length/totalEvents*100),
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
